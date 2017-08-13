@@ -20,5 +20,13 @@ Table of Contents
       * [Fitness](#fitness)
       * [Lifestyle](#lifestyle)
       * [Economy](#economy)
+   * [MindMeister](#mindmeister)
+      * [Work](#work)
+         * [Projects](#projects)
+      * [Self](#self)
+         * [Cloud Services](#cloud-services)
+   * [GitHub](#github)
+      * [Repos](#repos)
+      * [Gists](#gists)
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
