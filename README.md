@@ -33,9 +33,6 @@ Table of Contents
       * [Projects](#projects)
       * [Devops](#devops)
       * [Finance](#finance)
-      * [Opensource](#opensource)
       * [Tricks](#tricks)
-      * [UI](#ui)
-      * [Tools](#tools)
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
