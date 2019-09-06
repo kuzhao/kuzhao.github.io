@@ -3,20 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/about/</loc>
-    <lastmod>2019-03-26T08:47:11+01:00</lastmod>
+    <loc>http://192.168.3.10/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>http://192.168.3.10/categories/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
-  </url>
-  
-  <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>http://192.168.3.10/tags/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>
