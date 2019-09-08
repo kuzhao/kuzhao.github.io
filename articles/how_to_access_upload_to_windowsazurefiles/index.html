@@ -1,0 +1,231 @@
+<!doctype html>
+
+
+
+ <html class="no-js" lang=""> 
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>DuckDuck Go!</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Serif+Pro|Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" crossorigin="anonymous">
+
+  <link rel="stylesheet" href=https://kuzhao.github.io/css/main.css>
+  <link rel="stylesheet" href=https://kuzhao.github.io/css/magnific-popup.css>
+
+  
+
+
+<html>
+  <body lang="en">
+  
+
+
+  <div id="main">
+    
+
+<div id="nav">
+  
+  <a href="https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG" class="image-link">
+    <img class="logo animated flipInY" src="https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG"/>
+  </a>
+  
+  
+  <ul>
+    
+      <li><a href="https://kuzhao.github.io/">
+          <span>Home</span>
+      </a></li>
+    
+      <li><a href="https://kuzhao.github.io/articles/">
+          <span>All Articles</span>
+      </a></li>
+    
+  </ul>
+
+</div>
+
+    <h1 class="animated flipInX"><a href="https://kuzhao.github.io/articles/how_to_access_upload_to_windowsazurefiles/">How to access/upload to Windows Azure Files</a></h1>
+    <p class="post-info animated fadeIn">200 Words | Approximately 1 Minutes Read | Last Modified on September 8, 2019
+    <ol>
+<li>Install Az Module for PwShell
+<code>
+Install-Module -Name Az -AllowClobber -Scope AllUsers
+</code></li>
+<li>Import Az.Storage
+```
+PS C:\Users\admin&gt; Import-Module Az.Storage
+PS C:\Users\admin&gt; Get-Module</li>
+</ol>
+
+<p>ModuleType Version    Name                                ExportedCommands</p>
+
+<hr />
+
+<p>Script     1.6.2      Az.Accounts                         {Add-AzEnvironment, Clear-AzContext, Clear-AzDefault, Conn&hellip;
+Script     1.6.0      Az.Storage                          {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa&hellip;
+&hellip;</p>
+
+<pre><code>3. Login Azure account
+</code></pre>
+
+<p>PS C:\Users\admin&gt; Connect-AzAccount</p>
+
+<p>Account                     SubscriptionName         TenantId                             Environment</p>
+
+<hr />
+
+<p>AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud</p>
+
+<pre><code>4. Initialize storage access
+* Get storage access key
+</code></pre>
+
+<p>$key=PS C:\Users\admin&gt; $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123
+PS C:\Users\admin&gt; $key.GetType()</p>
+
+<p>IsPublic IsSerial Name                                     BaseType</p>
+
+<hr />
+
+<p>True     True     Object[]                                 System.Array
+PS C:\Users\admin&gt; $key[0].GetType()</p>
+
+<p>IsPublic IsSerial Name                                     BaseType</p>
+
+<hr />
+
+<p>True     False    StorageAccountKey                        System.Object</p>
+
+<pre><code>* Create storage context
+</code></pre>
+
+<p>$context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value</p>
+
+<pre><code>5. Azure Files share operation
+</code></pre>
+
+<p>PS C:\Users\admin&gt; $context |Get-AzStorageShare</p>
+
+<p>File End Point: <a href="https://vtkmnck123.file.core.windows.net/">https://vtkmnck123.file.core.windows.net/</a></p>
+
+<p>Name                                                            LastModified       IsSnapshot         SnapshotTime</p>
+
+<hr />
+
+<p>vmtkndi348c20                                                   6/18/2019 2:19:&hellip; False
+PS C:\Users\admin&gt; $context | Remove-AzStorageFile -ShareName vmtkndi348c20 ubuntu-18.04.3-live-server-amd64.iso
+PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20</p>
+
+<p>Directory: <a href="https://vtkmnck123.file.core.windows.net/vmtkndi348c20">https://vtkmnck123.file.core.windows.net/vmtkndi348c20</a></p>
+
+<p>Type                Length Name</p>
+
+<hr />
+
+<pre><code>                     1 data
+                     1 LogFiles
+                     1 site
+</code></pre>
+
+<p>PS C:\Users\admin&gt; $context | Set-AzStorageFileContent -ShareName vmtkndi348c20 -Source &ldquo;C:\Users\admin\Downloads\example_pcap.pcap&rdquo;
+PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20</p>
+
+<p>Directory: <a href="https://vtkmnck123.file.core.windows.net/vmtkndi348c20">https://vtkmnck123.file.core.windows.net/vmtkndi348c20</a></p>
+
+<p>Type                Length Name</p>
+
+<hr />
+
+<pre><code>                     1 data
+                     1 example_pcap.pcap
+                     1 LogFiles
+                     1 site
+</code></pre>
+
+<p>PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20 -Path config/ | Get-AzStorageFile</p>
+
+<p>Directory: <a href="https://vtkmnck123.file.core.windows.net/vmtkndi348c20/config">https://vtkmnck123.file.core.windows.net/vmtkndi348c20/config</a></p>
+
+<p>Type                Length Name</p>
+
+<hr />
+
+<pre><code>                     1 elasticsearch.yml
+</code></pre>
+
+<p>```</p>
+
+
+
+    
+        <div class="social">
+  
+    <div>
+        <a href="https://www.linkedin.com/in/andy-zhao-405a8156">LN</a>
+    </div>
+  
+    <div>
+        <a href="https://github.com/kuzhao">Github</a>
+    </div>
+  
+</div>
+
+
+
+    
+  </div>
+
+  
+
+
+
+<div id="sidebar">
+  
+  <a href="https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG" class="image-link">
+    <img class="logo animated flipInY" src="https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG"/>
+  </a>
+  
+
+  <h2>URLs</h2>
+  <ul>
+    
+      <li><a href="https://kuzhao.github.io/">Home</a></li>
+    
+      <li><a href="https://kuzhao.github.io/articles/">All Articles</a></li>
+    
+  </ul>
+
+  <h2>Recent posts</h2>
+  <ul>
+    
+      
+    
+      
+    
+  </ul>
+
+  <h2>Projects</h2>
+  <ul>
+    
+  </ul>
+</div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src=https://kuzhao.github.io/js/jquery-1.11.2.min.js></script>
+  <script src=https://kuzhao.github.io/js/main.js></script>
+
+  
+  <script src=https://kuzhao.github.io/js/jquery.magnific-popup.min.js></script>
+
+  
+  
+
+  
+</body>
+</html>
+

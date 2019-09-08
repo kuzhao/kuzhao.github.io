@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Charles Lindbergh on DuckDuck Go!</title>
-    <link>https://kuzhao.github.io/</link>
-    <description>Recent content in Charles Lindbergh on DuckDuck Go!</description>
+    <title>Articles on DuckDuck Go!</title>
+    <link>https://kuzhao.github.io/articles/</link>
+    <description>Recent content in Articles on DuckDuck Go!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Sep 2019 03:00:53 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Sep 2019 16:47:11 +0800</lastBuildDate>
     
-	<atom:link href="https://kuzhao.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kuzhao.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

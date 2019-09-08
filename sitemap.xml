@@ -3,16 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://192.168.3.10/</loc>
+    <loc>https://kuzhao.github.io/articles/how_to_access_upload_to_windowsazurefiles/</loc>
+    <lastmod>2019-09-08T16:47:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://192.168.3.10/categories/</loc>
+    <loc>https://kuzhao.github.io/articles/running_elastic&#43;kibana_on_azure_container_instance/</loc>
+    <lastmod>2019-09-08T16:47:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuzhao.github.io/</loc>
+    <lastmod>2019-09-06T03:00:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuzhao.github.io/articles/</loc>
+    <lastmod>2019-09-08T16:47:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://192.168.3.10/tags/</loc>
+    <loc>https://kuzhao.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kuzhao.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
