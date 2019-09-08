@@ -1,0 +1,3 @@
+[submodule "themes/pristine"]
+	path = themes/pristine
+	url = https://github.com/sakibccr/pristine.git

@@ -1,0 +1,24 @@
+baseURL = "https://kuzhao.github.io/"
+languageCode = "en-us"
+title = "DuckDuck Go!"
+canonifyURLs = true
+enableEmoji = true
+theme="pristine"
+[params]
+    portrait = "https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG"
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "All Articles"
+  url = "/articles/"
+  weight = 2
+
+[[params.social]]
+    title = "LN"
+    url = "https://www.linkedin.com/in/andy-zhao-405a8156"
+[[params.social]]
+    title = "Github"
+    url = "https://github.com/kuzhao"
