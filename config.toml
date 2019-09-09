@@ -1,4 +1,4 @@
-baseURL = "https://kuzhao.github.io/"
+baseURL = "http://testlinux-pub.eastus.cloudapp.azure.com/"
 languageCode = "en-us"
 title = "DuckDuck Go!"
 canonifyURLs = true

@@ -46,39 +46,42 @@ draft: false
   }
 ]
 ```
-
 * Failed at starting elasticsearch:  
-----------------------------------
 
 ```
-ERROR: [2] bootstrap checks failed
+ERROR: [2] bootstrap checks failed  
 [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 [2]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured
 ```
-
-[1] <= Increase container RAM to 3GB
+**Planned solution**  
+[1] <= Increase container RAM to 3GB  
 [2] <= Add "environmentVariables":  
+
 ```json
-[
-                {
-                  "name": "discovery.type",
-                  "value": "single-node"
-                }
-              ]
-```  
-in template file. Not work when deploy:  
----------------------------------------
+"environmentVariables":[
+  {
+    "name": "discovery.type",
+    "value": "single-node"
+  }
+]
+```
+**Failing deployment:**   
+
+```
 Deployment failed. Correlation ID: 1608e8d7-3af1-4cac-bfe1-22276ccf114a. {
     "code": "InvalidContainerEnvironmentVariable",
     "message": "The environment variable name in container 'elasticsearch' of container group 'wordpress-containerinstance' is invalid. A valid environment variable name must start with alphabetic character or '_', followed by a string of alphanumeric characters or '_' (e.g. 'my_name',  or 'MY_NAME',  or 'MyName')."
 }
+```
+* After fixing env var name format (replacing '.' with '_'), elasticsearch did not honor this env as part of settings.  
+Also, cannot modify existing containerGroup:  
 
-Cannot modify existing containerGroup:
---------------------------------------
+```
 Deployment failed. Correlation ID: a47f7215-8cb9-45e3-97ec-5b86aef3b465. {
   "error": {        
     "code": "InvalidContainerGroupUpdate",
     "message": "The updates on container group 'wordpress-containerinstance' are invalid. If you are going to update the os type, restart policy, network profile, CPU, memory or GPU resources for a container group, you must delete it first and then create a new one."
   }
 }
+```
 

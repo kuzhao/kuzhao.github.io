@@ -8,7 +8,6 @@ draft: false
 ```
 Install-Module -Name Az -AllowClobber -Scope AllUsers
 ```
-
 2. Import Az.Storage
 
 ```
@@ -21,7 +20,6 @@ Script     1.6.2      Az.Accounts                         {Add-AzEnvironment, Cl
 Script     1.6.0      Az.Storage                          {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa...
 ...
 ```
-
 3. Login Azure account
 
 ```
@@ -31,7 +29,6 @@ Account                     SubscriptionName         TenantId                   
 -------                     ----------------         --------                             -----------
 AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud
 ```
-
 4. Initialize storage access
 * Get storage access key
 
@@ -48,13 +45,11 @@ IsPublic IsSerial Name                                     BaseType
 -------- -------- ----                                     --------
 True     False    StorageAccountKey                        System.Object
 ```
-
 * Create storage context
 
 ```
 $context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value
 ```
-
 5. Azure Files share operation
 
 ```
