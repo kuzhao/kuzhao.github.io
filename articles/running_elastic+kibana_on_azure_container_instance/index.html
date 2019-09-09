@@ -14,8 +14,8 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Serif+Pro|Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" crossorigin="anonymous">
 
-  <link rel="stylesheet" href=https://kuzhao.github.io/css/main.css>
-  <link rel="stylesheet" href=https://kuzhao.github.io/css/magnific-popup.css>
+  <link rel="stylesheet" href=http://testlinux-pub.eastus.cloudapp.azure.com/css/main.css>
+  <link rel="stylesheet" href=http://testlinux-pub.eastus.cloudapp.azure.com/css/magnific-popup.css>
 
   
 
@@ -37,11 +37,11 @@
   
   <ul>
     
-      <li><a href="https://kuzhao.github.io/">
+      <li><a href="http://testlinux-pub.eastus.cloudapp.azure.com/">
           <span>Home</span>
       </a></li>
     
-      <li><a href="https://kuzhao.github.io/articles/">
+      <li><a href="http://testlinux-pub.eastus.cloudapp.azure.com/articles/">
           <span>All Articles</span>
       </a></li>
     
@@ -49,11 +49,9 @@
 
 </div>
 
-    <h1 class="animated flipInX"><a href="https://kuzhao.github.io/articles/running_elastic&#43;kibana_on_azure_container_instance/">Running Elastic&#43;Kibana on Azure Container Instance</a></h1>
+    <h1 class="animated flipInX"><a href="http://testlinux-pub.eastus.cloudapp.azure.com/articles/running_elastic&#43;kibana_on_azure_container_instance/">Running Elastic&#43;Kibana on Azure Container Instance</a></h1>
     <p class="post-info animated fadeIn">300 Words | Approximately 2 Minutes Read | Last Modified on September 8, 2019
-    
-
-<ul>
+    <ul>
 <li>Start from azure-quickstart-templates\201-aci-wordpress (<a href="https://github.com/Azure/azure-quickstart-templates.git">https://github.com/Azure/azure-quickstart-templates.git</a>)</li>
 </ul>
 
@@ -97,36 +95,47 @@
 ]
 </code></pre>
 
-<h2 id="failed-at-starting-elasticsearch">Failed at starting elasticsearch:</h2>
+<ul>
+<li>Failed at starting elasticsearch:<br /></li>
+</ul>
 
-<pre><code>ERROR: [2] bootstrap checks failed
+<pre><code>ERROR: [2] bootstrap checks failed  
 [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 [2]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured
 </code></pre>
 
-<p>[1] &lt;= Increase container RAM to 3GB
-[2] &lt;= Add &ldquo;environmentVariables&rdquo;: [
-                {
-                  &ldquo;name&rdquo;: &ldquo;discovery.type&rdquo;,
-                  &ldquo;value&rdquo;: &ldquo;single-node&rdquo;
-                }
-              ]</p>
+<p><strong>Planned solution</strong><br />
+[1] &lt;= Increase container RAM to 3GB<br />
+[2] &lt;= Add &ldquo;environmentVariables&rdquo;:</p>
 
-<h2 id="in-template-file-not-work-when-deploy">in template file. Not work when deploy:</h2>
-
-<p>Deployment failed. Correlation ID: 1608e8d7-3af1-4cac-bfe1-22276ccf114a. {
-    &ldquo;code&rdquo;: &ldquo;InvalidContainerEnvironmentVariable&rdquo;,
-    &ldquo;message&rdquo;: &ldquo;The environment variable name in container &lsquo;elasticsearch&rsquo; of container group &lsquo;wordpress-containerinstance&rsquo; is invalid. A valid environment variable name must start with alphabetic character or &lsquo;<em>&rsquo;, followed by a string of alphanumeric characters or &lsquo;</em>&rsquo; (e.g. &lsquo;my_name&rsquo;,  or &lsquo;MY_NAME&rsquo;,  or &lsquo;MyName&rsquo;).&rdquo;
-}</p>
-
-<h2 id="cannot-modify-existing-containergroup">Cannot modify existing containerGroup:</h2>
-
-<p>Deployment failed. Correlation ID: a47f7215-8cb9-45e3-97ec-5b86aef3b465. {
-  &ldquo;error&rdquo;: {<br />
-    &ldquo;code&rdquo;: &ldquo;InvalidContainerGroupUpdate&rdquo;,
-    &ldquo;message&rdquo;: &ldquo;The updates on container group &lsquo;wordpress-containerinstance&rsquo; are invalid. If you are going to update the os type, restart policy, network profile, CPU, memory or GPU resources for a container group, you must delete it first and then create a new one.&rdquo;
+<pre><code class="language-json">&quot;environmentVariables&quot;:[
+  {
+    &quot;name&quot;: &quot;discovery.type&quot;,
+    &quot;value&quot;: &quot;single-node&quot;
   }
-}</p>
+]
+</code></pre>
+
+<p><strong>Failing deployment:</strong></p>
+
+<pre><code>Deployment failed. Correlation ID: 1608e8d7-3af1-4cac-bfe1-22276ccf114a. {
+    &quot;code&quot;: &quot;InvalidContainerEnvironmentVariable&quot;,
+    &quot;message&quot;: &quot;The environment variable name in container 'elasticsearch' of container group 'wordpress-containerinstance' is invalid. A valid environment variable name must start with alphabetic character or '_', followed by a string of alphanumeric characters or '_' (e.g. 'my_name',  or 'MY_NAME',  or 'MyName').&quot;
+}
+</code></pre>
+
+<ul>
+<li>After fixing env var name format (replacing &lsquo;.&rsquo; with &lsquo;_&lsquo;), elasticsearch did not honor this env as part of settings.<br />
+Also, cannot modify existing containerGroup:<br /></li>
+</ul>
+
+<pre><code>Deployment failed. Correlation ID: a47f7215-8cb9-45e3-97ec-5b86aef3b465. {
+  &quot;error&quot;: {        
+    &quot;code&quot;: &quot;InvalidContainerGroupUpdate&quot;,
+    &quot;message&quot;: &quot;The updates on container group 'wordpress-containerinstance' are invalid. If you are going to update the os type, restart policy, network profile, CPU, memory or GPU resources for a container group, you must delete it first and then create a new one.&quot;
+  }
+}
+</code></pre>
 
 
 
@@ -162,9 +171,9 @@
   <h2>URLs</h2>
   <ul>
     
-      <li><a href="https://kuzhao.github.io/">Home</a></li>
+      <li><a href="http://testlinux-pub.eastus.cloudapp.azure.com/">Home</a></li>
     
-      <li><a href="https://kuzhao.github.io/articles/">All Articles</a></li>
+      <li><a href="http://testlinux-pub.eastus.cloudapp.azure.com/articles/">All Articles</a></li>
     
   </ul>
 
@@ -184,11 +193,11 @@
 </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src=https://kuzhao.github.io/js/jquery-1.11.2.min.js></script>
-  <script src=https://kuzhao.github.io/js/main.js></script>
+  <script src=http://testlinux-pub.eastus.cloudapp.azure.com/js/jquery-1.11.2.min.js></script>
+  <script src=http://testlinux-pub.eastus.cloudapp.azure.com/js/main.js></script>
 
   
-  <script src=https://kuzhao.github.io/js/jquery.magnific-popup.min.js></script>
+  <script src=http://testlinux-pub.eastus.cloudapp.azure.com/js/jquery.magnific-popup.min.js></script>
 
   
   

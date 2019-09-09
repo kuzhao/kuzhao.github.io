@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Articles on DuckDuck Go!</title>
-    <link>https://kuzhao.github.io/articles/</link>
+    <link>http://testlinux-pub.eastus.cloudapp.azure.com/articles/</link>
     <description>Recent content in Articles on DuckDuck Go!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 08 Sep 2019 16:47:11 +0800</lastBuildDate>
     
-	<atom:link href="https://kuzhao.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://testlinux-pub.eastus.cloudapp.azure.com/articles/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How to access/upload to Windows Azure Files</title>
-      <link>https://kuzhao.github.io/articles/how_to_access_upload_to_windowsazurefiles/</link>
+      <link>http://testlinux-pub.eastus.cloudapp.azure.com/articles/how_to_access_upload_to_windowsazurefiles/</link>
       <pubDate>Sun, 08 Sep 2019 16:47:11 +0800</pubDate>
       
-      <guid>https://kuzhao.github.io/articles/how_to_access_upload_to_windowsazurefiles/</guid>
+      <guid>http://testlinux-pub.eastus.cloudapp.azure.com/articles/how_to_access_upload_to_windowsazurefiles/</guid>
       <description>Install Az Module for PwShell  Install-Module -Name Az -AllowClobber -Scope AllUsers   Import Az.Storage  PS C:\Users\admin&amp;gt; Import-Module Az.Storage PS C:\Users\admin&amp;gt; Get-Module ModuleType Version Name ExportedCommands ---------- ------- ---- ---------------- Script 1.6.2 Az.Accounts {Add-AzEnvironment, Clear-AzContext, Clear-AzDefault, Conn... Script 1.6.0 Az.Storage {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa... ...   Login Azure account  PS C:\Users\admin&amp;gt; Connect-AzAccount Account SubscriptionName TenantId Environment ------- ---------------- -------- ----------- AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud   Initialize storage access Get storage access key  $key=PS C:\Users\admin&amp;gt; $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123 PS C:\Users\admin&amp;gt; $key.</description>
     </item>
     
     <item>
       <title>Running Elastic&#43;Kibana on Azure Container Instance</title>
-      <link>https://kuzhao.github.io/articles/running_elastic&#43;kibana_on_azure_container_instance/</link>
+      <link>http://testlinux-pub.eastus.cloudapp.azure.com/articles/running_elastic&#43;kibana_on_azure_container_instance/</link>
       <pubDate>Sun, 08 Sep 2019 16:47:11 +0800</pubDate>
       
-      <guid>https://kuzhao.github.io/articles/running_elastic&#43;kibana_on_azure_container_instance/</guid>
+      <guid>http://testlinux-pub.eastus.cloudapp.azure.com/articles/running_elastic&#43;kibana_on_azure_container_instance/</guid>
       <description>Start from azure-quickstart-templates\201-aci-wordpress (https://github.com/Azure/azure-quickstart-templates.git)  &amp;quot;containers&amp;quot;: [ { &amp;quot;name&amp;quot;: &amp;quot;elasticsearch&amp;quot;, &amp;quot;properties&amp;quot;: { &amp;quot;image&amp;quot;: &amp;quot;elasticsearch:7.3.1&amp;quot;, &amp;quot;resources&amp;quot;: { &amp;quot;requests&amp;quot;: { &amp;quot;cpu&amp;quot;: &amp;quot;[variables(&#39;cpuCores&#39;)]&amp;quot;, &amp;quot;memoryInGb&amp;quot;: &amp;quot;[variables(&#39;memoryInGb&#39;)]&amp;quot; } } } }, { &amp;quot;name&amp;quot;: &amp;quot;kibana&amp;quot;, &amp;quot;properties&amp;quot;: { &amp;quot;image&amp;quot;: &amp;quot;kibana:7.3.1&amp;quot;, &amp;quot;ports&amp;quot;: [ { &amp;quot;protocol&amp;quot;: &amp;quot;Tcp&amp;quot;, &amp;quot;port&amp;quot;: 5601 } ], &amp;quot;environmentVariables&amp;quot;: [ { &amp;quot;name&amp;quot;: &amp;quot;ELASTICSEARCH_HOSTS&amp;quot;, &amp;quot;value&amp;quot;: &amp;quot;http://127.0.0.1:9200&amp;quot; } ], &amp;quot;resources&amp;quot;: { &amp;quot;requests&amp;quot;: { &amp;quot;cpu&amp;quot;: &amp;quot;[variables(&#39;cpuCores&#39;)]&amp;quot;, &amp;quot;memoryInGb&amp;quot;: &amp;quot;[variables(&#39;memoryInGb&#39;)]&amp;quot; } } } } ]   Failed at starting elasticsearch:</description>
     </item>
     

@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on DuckDuck Go!</title>
-    <link>https://kuzhao.github.io/tags/</link>
+    <link>http://testlinux-pub.eastus.cloudapp.azure.com/tags/</link>
     <description>Recent content in Tags on DuckDuck Go!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://kuzhao.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://testlinux-pub.eastus.cloudapp.azure.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

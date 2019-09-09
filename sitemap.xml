@@ -3,33 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://kuzhao.github.io/articles/how_to_access_upload_to_windowsazurefiles/</loc>
+    <loc>http://testlinux-pub.eastus.cloudapp.azure.com/articles/how_to_access_upload_to_windowsazurefiles/</loc>
     <lastmod>2019-09-08T16:47:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuzhao.github.io/articles/running_elastic&#43;kibana_on_azure_container_instance/</loc>
+    <loc>http://testlinux-pub.eastus.cloudapp.azure.com/articles/running_elastic&#43;kibana_on_azure_container_instance/</loc>
     <lastmod>2019-09-08T16:47:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuzhao.github.io/</loc>
+    <loc>http://testlinux-pub.eastus.cloudapp.azure.com/</loc>
     <lastmod>2019-09-06T03:00:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuzhao.github.io/articles/</loc>
+    <loc>http://testlinux-pub.eastus.cloudapp.azure.com/articles/</loc>
     <lastmod>2019-09-08T16:47:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://kuzhao.github.io/categories/</loc>
+    <loc>http://testlinux-pub.eastus.cloudapp.azure.com/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://kuzhao.github.io/tags/</loc>
+    <loc>http://testlinux-pub.eastus.cloudapp.azure.com/tags/</loc>
     <priority>0</priority>
   </url>
   

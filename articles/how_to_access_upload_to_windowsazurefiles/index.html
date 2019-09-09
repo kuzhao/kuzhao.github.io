@@ -14,8 +14,8 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Serif+Pro|Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" crossorigin="anonymous">
 
-  <link rel="stylesheet" href=https://kuzhao.github.io/css/main.css>
-  <link rel="stylesheet" href=https://kuzhao.github.io/css/magnific-popup.css>
+  <link rel="stylesheet" href=http://testlinux-pub.eastus.cloudapp.azure.com/css/main.css>
+  <link rel="stylesheet" href=http://testlinux-pub.eastus.cloudapp.azure.com/css/magnific-popup.css>
 
   
 
@@ -37,11 +37,11 @@
   
   <ul>
     
-      <li><a href="https://kuzhao.github.io/">
+      <li><a href="http://testlinux-pub.eastus.cloudapp.azure.com/">
           <span>Home</span>
       </a></li>
     
-      <li><a href="https://kuzhao.github.io/articles/">
+      <li><a href="http://testlinux-pub.eastus.cloudapp.azure.com/articles/">
           <span>All Articles</span>
       </a></li>
     
@@ -49,116 +49,110 @@
 
 </div>
 
-    <h1 class="animated flipInX"><a href="https://kuzhao.github.io/articles/how_to_access_upload_to_windowsazurefiles/">How to access/upload to Windows Azure Files</a></h1>
-    <p class="post-info animated fadeIn">200 Words | Approximately 1 Minutes Read | Last Modified on September 8, 2019
+    <h1 class="animated flipInX"><a href="http://testlinux-pub.eastus.cloudapp.azure.com/articles/how_to_access_upload_to_windowsazurefiles/">How to access/upload to Windows Azure Files</a></h1>
+    <p class="post-info animated fadeIn">300 Words | Approximately 2 Minutes Read | Last Modified on September 8, 2019
     <ol>
-<li>Install Az Module for PwShell
-<code>
-Install-Module -Name Az -AllowClobber -Scope AllUsers
-</code></li>
-<li>Import Az.Storage
-```
-PS C:\Users\admin&gt; Import-Module Az.Storage
-PS C:\Users\admin&gt; Get-Module</li>
+<li>Install Az Module for PwShell</li>
 </ol>
 
-<p>ModuleType Version    Name                                ExportedCommands</p>
-
-<hr />
-
-<p>Script     1.6.2      Az.Accounts                         {Add-AzEnvironment, Clear-AzContext, Clear-AzDefault, Conn&hellip;
-Script     1.6.0      Az.Storage                          {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa&hellip;
-&hellip;</p>
-
-<pre><code>3. Login Azure account
+<pre><code>Install-Module -Name Az -AllowClobber -Scope AllUsers
 </code></pre>
 
-<p>PS C:\Users\admin&gt; Connect-AzAccount</p>
+<ol>
+<li>Import Az.Storage</li>
+</ol>
 
-<p>Account                     SubscriptionName         TenantId                             Environment</p>
+<pre><code>PS C:\Users\admin&gt; Import-Module Az.Storage
+PS C:\Users\admin&gt; Get-Module
 
-<hr />
-
-<p>AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud</p>
-
-<pre><code>4. Initialize storage access
-* Get storage access key
+ModuleType Version    Name                                ExportedCommands
+---------- -------    ----                                ----------------
+Script     1.6.2      Az.Accounts                         {Add-AzEnvironment, Clear-AzContext, Clear-AzDefault, Conn...
+Script     1.6.0      Az.Storage                          {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa...
+...
 </code></pre>
 
-<p>$key=PS C:\Users\admin&gt; $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123
-PS C:\Users\admin&gt; $key.GetType()</p>
+<ol>
+<li>Login Azure account</li>
+</ol>
 
-<p>IsPublic IsSerial Name                                     BaseType</p>
+<pre><code>PS C:\Users\admin&gt; Connect-AzAccount
 
-<hr />
-
-<p>True     True     Object[]                                 System.Array
-PS C:\Users\admin&gt; $key[0].GetType()</p>
-
-<p>IsPublic IsSerial Name                                     BaseType</p>
-
-<hr />
-
-<p>True     False    StorageAccountKey                        System.Object</p>
-
-<pre><code>* Create storage context
+Account                     SubscriptionName         TenantId                             Environment
+-------                     ----------------         --------                             -----------
+AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud
 </code></pre>
 
-<p>$context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value</p>
+<ol>
+<li>Initialize storage access</li>
+<li>Get storage access key</li>
+</ol>
 
-<pre><code>5. Azure Files share operation
+<pre><code>$key=PS C:\Users\admin&gt; $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123
+PS C:\Users\admin&gt; $key.GetType()
+
+IsPublic IsSerial Name                                     BaseType
+-------- -------- ----                                     --------
+True     True     Object[]                                 System.Array
+PS C:\Users\admin&gt; $key[0].GetType()
+
+IsPublic IsSerial Name                                     BaseType
+-------- -------- ----                                     --------
+True     False    StorageAccountKey                        System.Object
 </code></pre>
 
-<p>PS C:\Users\admin&gt; $context |Get-AzStorageShare</p>
+<ul>
+<li>Create storage context</li>
+</ul>
 
-<p>File End Point: <a href="https://vtkmnck123.file.core.windows.net/">https://vtkmnck123.file.core.windows.net/</a></p>
+<pre><code>$context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value
+</code></pre>
 
-<p>Name                                                            LastModified       IsSnapshot         SnapshotTime</p>
+<ol>
+<li>Azure Files share operation</li>
+</ol>
 
-<hr />
+<pre><code>PS C:\Users\admin&gt; $context |Get-AzStorageShare
 
-<p>vmtkndi348c20                                                   6/18/2019 2:19:&hellip; False
+
+   File End Point: https://vtkmnck123.file.core.windows.net/
+
+Name                                                            LastModified       IsSnapshot         SnapshotTime
+----                                                            ------------       ----------         ------------
+vmtkndi348c20                                                   6/18/2019 2:19:... False
 PS C:\Users\admin&gt; $context | Remove-AzStorageFile -ShareName vmtkndi348c20 ubuntu-18.04.3-live-server-amd64.iso
-PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20</p>
+PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20
 
-<p>Directory: <a href="https://vtkmnck123.file.core.windows.net/vmtkndi348c20">https://vtkmnck123.file.core.windows.net/vmtkndi348c20</a></p>
 
-<p>Type                Length Name</p>
+   Directory: https://vtkmnck123.file.core.windows.net/vmtkndi348c20
 
-<hr />
+Type                Length Name
+----                ------ ----
+                         1 data
+                         1 LogFiles
+                         1 site
 
-<pre><code>                     1 data
-                     1 LogFiles
-                     1 site
+PS C:\Users\admin&gt; $context | Set-AzStorageFileContent -ShareName vmtkndi348c20 -Source &quot;C:\Users\admin\Downloads\example_pcap.pcap&quot;
+PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20
+
+
+   Directory: https://vtkmnck123.file.core.windows.net/vmtkndi348c20
+
+Type                Length Name
+----                ------ ----
+                         1 data
+                         1 example_pcap.pcap
+                         1 LogFiles
+                         1 site
+PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20 -Path config/ | Get-AzStorageFile
+
+
+   Directory: https://vtkmnck123.file.core.windows.net/vmtkndi348c20/config
+
+Type                Length Name
+----                ------ ----
+                         1 elasticsearch.yml
 </code></pre>
-
-<p>PS C:\Users\admin&gt; $context | Set-AzStorageFileContent -ShareName vmtkndi348c20 -Source &ldquo;C:\Users\admin\Downloads\example_pcap.pcap&rdquo;
-PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20</p>
-
-<p>Directory: <a href="https://vtkmnck123.file.core.windows.net/vmtkndi348c20">https://vtkmnck123.file.core.windows.net/vmtkndi348c20</a></p>
-
-<p>Type                Length Name</p>
-
-<hr />
-
-<pre><code>                     1 data
-                     1 example_pcap.pcap
-                     1 LogFiles
-                     1 site
-</code></pre>
-
-<p>PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20 -Path config/ | Get-AzStorageFile</p>
-
-<p>Directory: <a href="https://vtkmnck123.file.core.windows.net/vmtkndi348c20/config">https://vtkmnck123.file.core.windows.net/vmtkndi348c20/config</a></p>
-
-<p>Type                Length Name</p>
-
-<hr />
-
-<pre><code>                     1 elasticsearch.yml
-</code></pre>
-
-<p>```</p>
 
 
 
@@ -194,9 +188,9 @@ PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20</p>
   <h2>URLs</h2>
   <ul>
     
-      <li><a href="https://kuzhao.github.io/">Home</a></li>
+      <li><a href="http://testlinux-pub.eastus.cloudapp.azure.com/">Home</a></li>
     
-      <li><a href="https://kuzhao.github.io/articles/">All Articles</a></li>
+      <li><a href="http://testlinux-pub.eastus.cloudapp.azure.com/articles/">All Articles</a></li>
     
   </ul>
 
@@ -216,11 +210,11 @@ PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20</p>
 </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src=https://kuzhao.github.io/js/jquery-1.11.2.min.js></script>
-  <script src=https://kuzhao.github.io/js/main.js></script>
+  <script src=http://testlinux-pub.eastus.cloudapp.azure.com/js/jquery-1.11.2.min.js></script>
+  <script src=http://testlinux-pub.eastus.cloudapp.azure.com/js/main.js></script>
 
   
-  <script src=https://kuzhao.github.io/js/jquery.magnific-popup.min.js></script>
+  <script src=http://testlinux-pub.eastus.cloudapp.azure.com/js/jquery.magnific-popup.min.js></script>
 
   
   
