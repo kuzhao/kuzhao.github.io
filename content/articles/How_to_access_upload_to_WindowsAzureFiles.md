@@ -3,12 +3,12 @@ title: "How to access/upload to Windows Azure Files"
 date: 2019-09-08T16:47:11+08:00
 draft: false
 ---
-#### Install Az Module for PwShell
+### Install Az Module for PwShell
 ----------
 ```powershell
 Install-Module -Name Az -AllowClobber -Scope AllUsers
 ```
-#### Import Az.Storage
+### Import Az.Storage
 ----------
 ```powershell
 PS C:\Users\admin> Import-Module Az.Storage
@@ -20,7 +20,7 @@ Script     1.6.2      Az.Accounts                         {Add-AzEnvironment, Cl
 Script     1.6.0      Az.Storage                          {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa...
 ...
 ```
-#### Login to Azure account
+### Login to Azure account
 ----------
 ```powershell
 PS C:\Users\admin> Connect-AzAccount
@@ -29,7 +29,7 @@ Account                     SubscriptionName         TenantId                   
 -------                     ----------------         --------                             -----------
 AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud
 ```
-#### Initialize storage access
+### Initialize storage access
 ----------
 1. Get storage access key
 2. Create storage context
@@ -51,7 +51,7 @@ True     False    StorageAccountKey                        System.Object
 ```powershell
 $context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value
 ```
-#### Azure Files share operation
+### Azure Files share operation
 ----------
 ```powershell
 PS C:\Users\admin> $context |Get-AzStorageShare
