@@ -51,9 +51,11 @@
 
     <h1 class="animated flipInX"><a href="https://kuzhao.github.io/articles/running_elastic&#43;kibana_on_azure_container_instance/">Running Elastic&#43;Kibana on Azure Container Instance</a></h1>
     <p class="post-info animated fadeIn">300 Words | Approximately 2 Minutes Read | Last Modified on September 8, 2019
-    <ul>
-<li>Start from azure-quickstart-templates\201-aci-wordpress (<a href="https://github.com/Azure/azure-quickstart-templates.git">https://github.com/Azure/azure-quickstart-templates.git</a>)</li>
-</ul>
+    
+
+<h3 id="start-from-azure-quickstart-templates-201-aci-wordpress-https-github-com-azure-azure-quickstart-templates-git">Start from <a href="https://github.com/Azure/azure-quickstart-templates.git">azure-quickstart-templates\201-aci-wordpress</a></h3>
+
+<hr />
 
 <pre><code class="language-json">&quot;containers&quot;: [
   {
@@ -95,9 +97,9 @@
 ]
 </code></pre>
 
-<ul>
-<li>Failed at starting elasticsearch:<br /></li>
-</ul>
+<h3 id="failed-at-starting-elasticsearch">Failed at starting elasticsearch:</h3>
+
+<hr />
 
 <pre><code>ERROR: [2] bootstrap checks failed  
 [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
@@ -124,9 +126,13 @@
 }
 </code></pre>
 
+<h3 id="fix-env-var-name-format-replacing-with-but-not-working">Fix env var name format (replacing &lsquo;.&rsquo; with &lsquo;_&lsquo;) but not working</h3>
+
+<hr />
+
 <ul>
-<li>After fixing env var name format (replacing &lsquo;.&rsquo; with &lsquo;_&lsquo;), elasticsearch did not honor this env as part of settings.<br />
-Also, cannot modify existing containerGroup:<br /></li>
+<li>elasticsearch did not honor this env as part of settings.<br /></li>
+<li>Also, cannot modify existing containerGroup:</li>
 </ul>
 
 <pre><code>Deployment failed. Correlation ID: a47f7215-8cb9-45e3-97ec-5b86aef3b465. {
@@ -136,6 +142,8 @@ Also, cannot modify existing containerGroup:<br /></li>
   }
 }
 </code></pre>
+
+<h3 id="solution-pass-in-volume-that-holds-elasticsearch-config">Solution: pass in volume that holds elasticsearch config</h3>
 
 
 
