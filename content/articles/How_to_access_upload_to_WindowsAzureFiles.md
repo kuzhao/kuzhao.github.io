@@ -3,16 +3,14 @@ title: "How to access/upload to Windows Azure Files"
 date: 2019-09-08T16:47:11+08:00
 draft: false
 ---
-1. Install Az Module for PwShell
-
-
-```
+#### Install Az Module for PwShell
+----------
+```powershell
 Install-Module -Name Az -AllowClobber -Scope AllUsers
 ```
-2. Import Az.Storage
-
-
-```
+#### Import Az.Storage
+----------
+```powershell
 PS C:\Users\admin> Import-Module Az.Storage
 PS C:\Users\admin> Get-Module
 
@@ -22,21 +20,21 @@ Script     1.6.2      Az.Accounts                         {Add-AzEnvironment, Cl
 Script     1.6.0      Az.Storage                          {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa...
 ...
 ```
-3. Login Azure account
-
-
-```
+#### Login to Azure account
+----------
+```powershell
 PS C:\Users\admin> Connect-AzAccount
 
 Account                     SubscriptionName         TenantId                             Environment
 -------                     ----------------         --------                             -----------
 AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud
 ```
-4. Initialize storage access  
-* Get storage access key
+#### Initialize storage access
+----------
+1. Get storage access key
+2. Create storage context
 
-
-```
+```powershell
 $key=PS C:\Users\admin> $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123
 PS C:\Users\admin> $key.GetType()
 
@@ -49,16 +47,13 @@ IsPublic IsSerial Name                                     BaseType
 -------- -------- ----                                     --------
 True     False    StorageAccountKey                        System.Object
 ```
-* Create storage context
-
-
-```
+----------
+```powershell
 $context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value
 ```
-5. Azure Files share operation
-
-
-```
+#### Azure Files share operation
+----------
+```powershell
 PS C:\Users\admin> $context |Get-AzStorageShare
 
 
@@ -100,4 +95,3 @@ Type                Length Name
 ----                ------ ----
                          1 elasticsearch.yml
 ```
-
