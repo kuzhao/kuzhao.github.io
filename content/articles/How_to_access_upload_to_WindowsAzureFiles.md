@@ -5,10 +5,12 @@ draft: false
 ---
 1. Install Az Module for PwShell
 
+
 ```
 Install-Module -Name Az -AllowClobber -Scope AllUsers
 ```
 2. Import Az.Storage
+
 
 ```
 PS C:\Users\admin> Import-Module Az.Storage
@@ -22,6 +24,7 @@ Script     1.6.0      Az.Storage                          {Add-AzRmStorageContai
 ```
 3. Login Azure account
 
+
 ```
 PS C:\Users\admin> Connect-AzAccount
 
@@ -29,8 +32,9 @@ Account                     SubscriptionName         TenantId                   
 -------                     ----------------         --------                             -----------
 AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud
 ```
-4. Initialize storage access
+4. Initialize storage access  
 * Get storage access key
+
 
 ```
 $key=PS C:\Users\admin> $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123
@@ -47,10 +51,12 @@ True     False    StorageAccountKey                        System.Object
 ```
 * Create storage context
 
+
 ```
 $context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value
 ```
 5. Azure Files share operation
+
 
 ```
 PS C:\Users\admin> $context |Get-AzStorageShare
