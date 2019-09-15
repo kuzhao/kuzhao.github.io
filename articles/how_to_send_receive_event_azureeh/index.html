@@ -67,9 +67,12 @@ Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/event
 
 <p>You ought to pass both connStr obtained in above section, along with the name of EventHub to use, as the 1st and 2nd arg respectively.<br />
 For send.py specifically, you can pass a timestamp in the 3rd arg, for EH offset so that the script reads event since that particular datetime. Note that the format should be <strong>DDMMYYYY HH:MM:SS</strong> in <strong>UTC</strong>.<br />
-Example:<br />
-* send.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo;<br />
-* recv.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo; &ldquo;12/11/2018 09:15:32&rdquo;</p>
+Example:</p>
+
+<ul>
+<li>send.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo;<br /></li>
+<li>recv.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo; &ldquo;12/11/2018 09:15:32&rdquo;<br /></li>
+</ul>
 
 <h3 id="code-flow-notes">Code flow &amp; notes</h3>
 
