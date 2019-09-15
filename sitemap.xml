@@ -3,17 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://kuzhao.github.io/articles/how_to_send_receive_event_azureeh/</loc>
+    <loc>https://kuzhao.github.io/azurelab/how_to_send_receive_event_azureeh/</loc>
     <lastmod>2019-09-15T09:47:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuzhao.github.io/articles/how_to_access_upload_to_windowsazurefiles/</loc>
+    <loc>https://kuzhao.github.io/azurelab/how_to_access_upload_to_windowsazurefiles/</loc>
     <lastmod>2019-09-08T16:47:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuzhao.github.io/articles/running_elastic&#43;kibana_on_azure_container_instance/</loc>
+    <loc>https://kuzhao.github.io/azurelab/running_elastic&#43;kibana_on_azure_container_instance/</loc>
     <lastmod>2019-09-08T16:47:11+08:00</lastmod>
   </url>
   
@@ -23,7 +23,7 @@
   </url>
   
   <url>
-    <loc>https://kuzhao.github.io/articles/</loc>
+    <loc>https://kuzhao.github.io/azurelab/</loc>
     <lastmod>2019-09-15T09:47:11+08:00</lastmod>
     <priority>0</priority>
   </url>
