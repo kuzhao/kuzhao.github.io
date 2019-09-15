@@ -68,10 +68,10 @@ Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/event
 <p>You ought to pass both connStr obtained in above section, along with the name of EventHub to use, as the 1st and 2nd arg respectively.<br />
 For send.py specifically, you can pass a timestamp in the 3rd arg, for EH offset so that the script reads event since that particular datetime. Note that the format should be <strong>DDMMYYYY HH:MM:SS</strong> in <strong>UTC</strong>.<br />
 Example:<br />
-* send.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&ldquo;
+* send.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo;<br />
 * recv.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo; &ldquo;12/11/2018 09:15:32&rdquo;</p>
 
-<h4 id="code-flow-notes">Code flow &amp; notes</h4>
+<h3 id="code-flow-notes">Code flow &amp; notes</h3>
 
 <ul>
 <li>Init EHClient via <code>from_connection_string</code> class method of <code>EventHubClient</code> class<br /></li>
@@ -83,7 +83,7 @@ Example:<br />
 <li>In practical scenario, a more dynamic mechanism would be necessary to handle partition listening/reception<br /></li>
 </ul>
 
-<h4 id="eventhub-metrics">EventHub metrics</h4>
+<h3 id="eventhub-metrics">EventHub metrics</h3>
 
 <p>You should be able to see up and down in metric chart, Overview of EH namespace blade through AzurePortal. Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/EHmetrics.png">here</a> for an example.</p>
 
