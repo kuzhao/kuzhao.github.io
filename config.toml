@@ -5,15 +5,15 @@ canonifyURLs = true
 enableEmoji = true
 theme="pristine"
 [params]
-    portrait = "https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG"
+    portrait = "img/021002-O-9999G-015.jpg"
 [[menu.main]]
   name = "Home"
   url = "/"
   weight = 1
 
 [[menu.main]]
-  name = "All Articles"
-  url = "/articles/"
+  name = "AzureLab"
+  url = "/azurelab"
   weight = 2
 
 [[params.social]]
