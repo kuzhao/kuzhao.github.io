@@ -25,5 +25,6 @@ deploy:
   keep_history: true
   local_dir: public
   repo:  kuzhao/kuzhao.github.io
+  target_branch: master
   on:
     branch: master
