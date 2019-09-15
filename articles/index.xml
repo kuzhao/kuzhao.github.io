@@ -6,10 +6,23 @@
     <description>Recent content in Articles on DuckDuck Go!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Sep 2019 16:47:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 15 Sep 2019 09:47:11 +0800</lastBuildDate>
     
 	<atom:link href="https://kuzhao.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to send and receive event via Azure EventHub</title>
+      <link>https://kuzhao.github.io/articles/how_to_send_receive_event_azureeh/</link>
+      <pubDate>Sun, 15 Sep 2019 09:47:11 +0800</pubDate>
+      
+      <guid>https://kuzhao.github.io/articles/how_to_send_receive_event_azureeh/</guid>
+      <description>Sample code available at kuzhao/azurePaas
+Create an EH namespace and instance You should already have an EH resource ready for use. For how to create one, refer to Quickstart via Azure portal
+The next step would be to copy connStr and have it ready by your hand, as we will pass it as py mandatory argument of sample codes.
+Refer to snapshot here on where to get it.
+Explanation on the code I composed both py files based on the example azure-sdk-for-python</description>
+    </item>
     
     <item>
       <title>How to access/upload to Windows Azure Files</title>

@@ -1,0 +1,160 @@
+<!doctype html>
+
+
+
+ <html class="no-js" lang=""> 
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>DuckDuck Go!</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Serif+Pro|Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" crossorigin="anonymous">
+
+  <link rel="stylesheet" href=https://kuzhao.github.io/css/main.css>
+  <link rel="stylesheet" href=https://kuzhao.github.io/css/magnific-popup.css>
+
+  
+
+
+<html>
+  <body lang="en">
+  
+
+
+  <div id="main">
+    
+
+<div id="nav">
+  
+  <a href="https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG" class="image-link">
+    <img class="logo animated flipInY" src="https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG"/>
+  </a>
+  
+  
+  <ul>
+    
+      <li><a href="https://kuzhao.github.io/">
+          <span>Home</span>
+      </a></li>
+    
+      <li><a href="https://kuzhao.github.io/articles/">
+          <span>All Articles</span>
+      </a></li>
+    
+  </ul>
+
+</div>
+
+    <h1 class="animated flipInX"><a href="https://kuzhao.github.io/articles/how_to_send_receive_event_azureeh/">How to send and receive event via Azure EventHub</a></h1>
+    <p class="post-info animated fadeIn">400 Words | Approximately 2 Minutes Read | Last Modified on September 15, 2019
+    
+
+<p>Sample code available at <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub">kuzhao/azurePaas</a></p>
+
+<h3 id="create-an-eh-namespace-and-instance">Create an EH namespace and instance</h3>
+
+<p>You should already have an EH resource ready for use. For how to create one, refer to <a href="https://docs.microsoft.com/en-in/azure/event-hubs/event-hubs-create#create-an-event-hubs-namespace">Quickstart via Azure portal</a><br />
+The next step would be to copy connStr and have it ready by your hand, as we will pass it as py mandatory argument of sample codes.<br />
+Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/getEHconnStr.png">here</a> on where to get it.</p>
+
+<h3 id="explanation-on-the-code">Explanation on the code</h3>
+
+<p>I composed both py files based on the example <a href="https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/eventhub/azure-eventhubs/examples">azure-sdk-for-python</a></p>
+
+<p>You ought to pass both connStr obtained in above section, along with the name of EventHub to use, as the 1st and 2nd arg respectively.<br />
+For send.py specifically, you can pass a timestamp in the 3rd arg, for EH offset so that the script reads event since that particular datetime. Note that the format should be <strong>DDMMYYYY HH:MM:SS</strong> in <strong>UTC</strong>.<br />
+Example:<br />
+* send.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&ldquo;
+* recv.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo; &ldquo;12/11/2018 09:15:32&rdquo;</p>
+
+<h4 id="code-flow-notes">Code flow &amp; notes</h4>
+
+<ul>
+<li>Init EHClient via <code>from_connection_string</code> class method of <code>EventHubClient</code> class<br /></li>
+<li>Spawn EH sender/receiver via <code>add_receiver/sender</code> method of the client, with EH connection params<br /></li>
+<li><code>client.run()</code> to start client, establishing EH connection<br /></li>
+<li>Perform send/receive actions. I coded in blocking mode rather than async for simplicity as we only need PoC on functionality here<br /></li>
+<li>During the send/receive process, event details will get printed to terminal. You can see for each event the &ldquo;offset&rdquo; and &ldquo;seqNum&rdquo; values of event metadata, along with event body at the end<br /></li>
+<li>Note that per Azure recommendation <a href="https://docs.microsoft.com/en-in/azure/event-hubs/event-hubs-features#consumer-groups">here</a>, there should be only 1 consumer on one partition for a clientApp. Meanwhile, all partitions should be listened on in order to capture all published events. So there are <strong>2 consumers</strong> in recv.py, and statistics is printed separately at the end of each consumer reception<br /></li>
+<li>In practical scenario, a more dynamic mechanism would be necessary to handle partition listening/reception<br /></li>
+</ul>
+
+<h4 id="eventhub-metrics">EventHub metrics</h4>
+
+<p>You should be able to see up and down in metric chart, Overview of EH namespace blade through AzurePortal. Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/EHmetrics.png">here</a> for an example.</p>
+
+
+
+    
+        <div class="social">
+  
+    <div>
+        <a href="https://www.linkedin.com/in/andy-zhao-405a8156">LN</a>
+    </div>
+  
+    <div>
+        <a href="https://github.com/kuzhao">Github</a>
+    </div>
+  
+</div>
+
+
+
+    
+  </div>
+
+  
+
+
+
+<div id="sidebar">
+  
+  <a href="https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG" class="image-link">
+    <img class="logo animated flipInY" src="https://media.defense.gov/2004/Apr/09/2000593095/-1/-1/0/021002-O-9999G-015.JPG"/>
+  </a>
+  
+
+  <h2>URLs</h2>
+  <ul>
+    
+      <li><a href="https://kuzhao.github.io/">Home</a></li>
+    
+      <li><a href="https://kuzhao.github.io/articles/">All Articles</a></li>
+    
+  </ul>
+
+  <h2>Recent posts</h2>
+  <ul>
+    
+      
+    
+      
+    
+      
+    
+  </ul>
+
+  <h2>Projects</h2>
+  <ul>
+    
+  </ul>
+</div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src=https://kuzhao.github.io/js/jquery-1.11.2.min.js></script>
+  <script src=https://kuzhao.github.io/js/main.js></script>
+
+  
+  <script src=https://kuzhao.github.io/js/jquery.magnific-popup.min.js></script>
+
+  
+  
+
+  
+</body>
+</html>
+
