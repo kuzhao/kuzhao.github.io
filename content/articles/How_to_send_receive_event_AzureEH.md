@@ -15,7 +15,8 @@ I composed both py files based on the example [azure-sdk-for-python](https://git
 
 You ought to pass both connStr obtained in above section, along with the name of EventHub to use, as the 1st and 2nd arg respectively.  
 For send.py specifically, you can pass a timestamp in the 3rd arg, for EH offset so that the script reads event since that particular datetime. Note that the format should be **DDMMYYYY HH:MM:SS** in **UTC**.  
-Example:  
+Example:
+
 * send.py "\<connStr\>" "\<EHname\>"  
 * recv.py "\<connStr\>" "\<EHname\>" "12/11/2018 09:15:32"  
 
