@@ -29,5 +29,8 @@ Example:
 * Note that per Azure recommendation [here](https://docs.microsoft.com/en-in/azure/event-hubs/event-hubs-features#consumer-groups), there should be only 1 consumer on one partition for a clientApp. Meanwhile, all partitions should be listened on in order to capture all published events. So there are **2 consumers** in recv.py, and statistics is printed separately at the end of each consumer reception  
 * In practical scenario, a more dynamic mechanism would be necessary to handle partition listening/reception  
 
+### Sample logs
+Check [here](https://github.com/kuzhao/azurePaas/tree/master/eventhub/terminalLog) for a detailed send/recv running log.
+
 ### EventHub metrics
 You should be able to see up and down in metric chart, Overview of EH namespace blade through AzurePortal. Refer to snapshot [here](https://github.com/kuzhao/azurePaas/tree/master/eventhub/EHmetrics.png) for an example.
