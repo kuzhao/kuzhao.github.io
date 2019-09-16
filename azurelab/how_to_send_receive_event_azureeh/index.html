@@ -53,13 +53,13 @@
     <p class="post-info animated fadeIn">400 Words | Approximately 2 Minutes Read | Last Modified on September 15, 2019
     
 
-<p>Sample code available at <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub">kuzhao/azurePaas</a></p>
+<p>Sample code available at <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/send_recv_offset">kuzhao/azurePaas</a></p>
 
 <h3 id="create-an-eh-namespace-and-instance">Create an EH namespace and instance</h3>
 
 <p>You should already have an EH resource ready for use. For how to create one, refer to <a href="https://docs.microsoft.com/en-in/azure/event-hubs/event-hubs-create#create-an-event-hubs-namespace">Quickstart via Azure portal</a><br />
 The next step would be to copy connStr and have it ready by your hand, as we will pass it as py mandatory argument of sample codes.<br />
-Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/getEHconnStr.png">here</a> on where to get it.</p>
+Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/send_recv_offset/getEHconnStr.png">here</a> on where to get it.</p>
 
 <h3 id="explanation-on-the-code">Explanation on the code</h3>
 
@@ -70,8 +70,8 @@ For send.py specifically, you can pass a timestamp in the 3rd arg, for EH offset
 Example:</p>
 
 <ul>
-<li>send.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo;<br /></li>
-<li>recv.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo; &ldquo;12/11/2018 09:15:32&rdquo;<br /></li>
+<li>send.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&ldquo;</li>
+<li>recv.py &ldquo;&lt;connStr&gt;&rdquo; &ldquo;&lt;EHname&gt;&rdquo; &ldquo;12/11/2018 09:15:32&rdquo;</li>
 </ul>
 
 <h3 id="code-flow-notes">Code flow &amp; notes</h3>
@@ -88,11 +88,11 @@ Example:</p>
 
 <h3 id="sample-logs">Sample logs</h3>
 
-<p>Check <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/terminalLog">here</a> for a detailed send/recv running log.</p>
+<p>Check <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/send_recv_offset/terminalLog">here</a> for a detailed send/recv running log.</p>
 
 <h3 id="eventhub-metrics">EventHub metrics</h3>
 
-<p>You should be able to see up and down in metric chart, Overview of EH namespace blade through AzurePortal. Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/EHmetrics.png">here</a> for an example.</p>
+<p>You should be able to see up and down in metric chart, Overview of EH namespace blade through AzurePortal. Refer to snapshot <a href="https://github.com/kuzhao/azurePaas/tree/master/eventhub/send_recv_offset/EHmetrics.png">here</a> for an example.</p>
 
 
 
