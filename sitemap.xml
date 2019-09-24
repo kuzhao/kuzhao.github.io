@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kuzhao.github.io/azurelab/how_to_send_receive_eh_db/</loc>
+    <lastmod>2019-09-24T08:42:11+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kuzhao.github.io/azurelab/how_to_send_receive_event_azureeh/</loc>
     <lastmod>2019-09-15T09:47:11+08:00</lastmod>
   </url>
@@ -24,7 +29,7 @@
   
   <url>
     <loc>https://kuzhao.github.io/azurelab/</loc>
-    <lastmod>2019-09-15T09:47:11+08:00</lastmod>
+    <lastmod>2019-09-24T08:42:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
