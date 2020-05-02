@@ -1,5 +1,5 @@
 ---
-title: "How to send and receive event via Azure EventHub"
+title: "How to send and receive events via Azure EventHub"
 date: 2019-09-15T09:47:11+08:00
 draft: false
 ---

@@ -1,5 +1,5 @@
 ---
-title: "How to send and receive event with EventHub in Azure Databricks"
+title: "How to send and receive events with EventHub in Azure Databricks"
 date: 2019-09-24T08:42:11+08:00
 draft: false
 ---
