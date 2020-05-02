@@ -16,7 +16,7 @@ script:
 env:
   global:
     - PRODUCTION=true
-    - HUGO_RELEASE=0.54.0
+    - HUGO_RELEASE=0.69.2
 
 deploy:
   provider: pages
