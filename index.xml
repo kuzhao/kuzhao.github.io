@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>How to send and receive event with EventHub in Azure Databricks</title>
+      <title>How to send and receive events with EventHub in Azure Databricks</title>
       <link>https://kuzhao.github.io/azurelab/how_to_send_receive_eh_db/</link>
       <pubDate>Tue, 24 Sep 2019 08:42:11 +0800</pubDate>
       
@@ -25,7 +25,7 @@ Explanation on the code I composed both scala files based on Microsoft Azure HDI
     </item>
     
     <item>
-      <title>How to send and receive event via Azure EventHub</title>
+      <title>How to send and receive events via Azure EventHub</title>
       <link>https://kuzhao.github.io/azurelab/how_to_send_receive_event_azureeh/</link>
       <pubDate>Sun, 15 Sep 2019 09:47:11 +0800</pubDate>
       
@@ -38,7 +38,7 @@ Explanation on the code I composed both py files based on the example azure-sdk-
     </item>
     
     <item>
-      <title>How to access/upload to Windows Azure Files</title>
+      <title>How to access/upload to Windows Azure Files in PowerShell</title>
       <link>https://kuzhao.github.io/azurelab/how_to_access_upload_to_windowsazurefiles/</link>
       <pubDate>Sun, 08 Sep 2019 16:47:11 +0800</pubDate>
       
