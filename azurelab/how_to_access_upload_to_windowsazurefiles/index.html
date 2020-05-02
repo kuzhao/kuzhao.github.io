@@ -51,16 +51,10 @@
 
     <h1 class="animated flipInX"><a href="https://kuzhao.github.io/azurelab/how_to_access_upload_to_windowsazurefiles/">How to access/upload to Windows Azure Files in PowerShell</a></h1>
     <p class="post-info animated fadeIn">300 Words | Approximately 2 Minutes Read | Last Modified on September 8, 2019
-    
-
-<h3 id="install-az-module-for-pwshell">Install Az Module for PwShell</h3>
-
-<pre><code class="language-powershell">Install-Module -Name Az -AllowClobber -Scope AllUsers
-</code></pre>
-
-<h3 id="import-az-storage">Import Az.Storage</h3>
-
-<pre><code class="language-powershell">PS C:\Users\admin&gt; Import-Module Az.Storage
+    <h3 id="install-az-module-for-pwshell">Install Az Module for PwShell</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">Install-Module -Name Az -AllowClobber -Scope AllUsers
+</code></pre></div><h3 id="import-azstorage">Import Az.Storage</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">PS C:\Users\admin&gt; Import-Module Az.Storage
 PS C:\Users\admin&gt; Get-Module
 
 ModuleType Version    Name                                ExportedCommands
@@ -68,25 +62,18 @@ ModuleType Version    Name                                ExportedCommands
 Script     1.6.2      Az.Accounts                         {Add-AzEnvironment, Clear-AzContext, Clear-AzDefault, Conn...
 Script     1.6.0      Az.Storage                          {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa...
 ...
-</code></pre>
-
-<h3 id="login-to-azure-account">Login to Azure account</h3>
-
-<pre><code class="language-powershell">PS C:\Users\admin&gt; Connect-AzAccount
+</code></pre></div><h3 id="login-to-azure-account">Login to Azure account</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">PS C:\Users\admin&gt; Connect-AzAccount
 
 Account                     SubscriptionName         TenantId                             Environment
 -------                     ----------------         --------                             -----------
 AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud
-</code></pre>
-
-<h3 id="initialize-storage-access">Initialize storage access</h3>
-
+</code></pre></div><h3 id="initialize-storage-access">Initialize storage access</h3>
 <ol>
 <li>Get storage access key</li>
 <li>Create storage context</li>
 </ol>
-
-<pre><code class="language-powershell">$key=PS C:\Users\admin&gt; $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$key=PS C:\Users\admin&gt; $key=Get-AzStorageAccountKey -ResourceGroupName <span style="color:#66d9ef">Default</span> -Name vtkmnck123
 PS C:\Users\admin&gt; $key.GetType()
 
 IsPublic IsSerial Name                                     BaseType
@@ -97,28 +84,22 @@ PS C:\Users\admin&gt; $key[0].GetType()
 IsPublic IsSerial Name                                     BaseType
 -------- -------- ----                                     --------
 True     False    StorageAccountKey                        System.Object
-</code></pre>
-
-<hr />
-
-<pre><code class="language-powershell">$context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value
-</code></pre>
-
-<h3 id="azure-files-share-operation">Azure Files share operation</h3>
-
-<pre><code class="language-powershell">PS C:\Users\admin&gt; $context |Get-AzStorageShare
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value
+</code></pre></div><h3 id="azure-files-share-operation">Azure Files share operation</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">PS C:\Users\admin&gt; $context |Get-AzStorageShare
 
 
-   File End Point: https://vtkmnck123.file.core.windows.net/
+   File <span style="color:#66d9ef">End</span> Point<span style="color:#960050;background-color:#1e0010">:</span> https<span style="color:#960050;background-color:#1e0010">:</span>//vtkmnck123.file.core.windows.net/
 
 Name                                                            LastModified       IsSnapshot         SnapshotTime
 ----                                                            ------------       ----------         ------------
-vmtkndi348c20                                                   6/18/2019 2:19:... False
+vmtkndi348c20                                                   6/18/2019 2<span style="color:#960050;background-color:#1e0010">:</span>19<span style="color:#960050;background-color:#1e0010">:</span>... False
 PS C:\Users\admin&gt; $context | Remove-AzStorageFile -ShareName vmtkndi348c20 ubuntu-18.04.3-live-server-amd64.iso
 PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20
 
 
-   Directory: https://vtkmnck123.file.core.windows.net/vmtkndi348c20
+   Directory<span style="color:#960050;background-color:#1e0010">:</span> https<span style="color:#960050;background-color:#1e0010">:</span>//vtkmnck123.file.core.windows.net/vmtkndi348c20
 
 Type                Length Name
 ----                ------ ----
@@ -126,11 +107,11 @@ Type                Length Name
                          1 LogFiles
                          1 site
 
-PS C:\Users\admin&gt; $context | Set-AzStorageFileContent -ShareName vmtkndi348c20 -Source &quot;C:\Users\admin\Downloads\example_pcap.pcap&quot;
+PS C:\Users\admin&gt; $context | Set-AzStorageFileContent -ShareName vmtkndi348c20 -Source <span style="color:#e6db74">&#34;C:\Users\admin\Downloads\example_pcap.pcap&#34;</span>
 PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20
 
 
-   Directory: https://vtkmnck123.file.core.windows.net/vmtkndi348c20
+   Directory<span style="color:#960050;background-color:#1e0010">:</span> https<span style="color:#960050;background-color:#1e0010">:</span>//vtkmnck123.file.core.windows.net/vmtkndi348c20
 
 Type                Length Name
 ----                ------ ----
@@ -141,13 +122,12 @@ Type                Length Name
 PS C:\Users\admin&gt; $context | Get-AzStorageFile -ShareName vmtkndi348c20 -Path config/ | Get-AzStorageFile
 
 
-   Directory: https://vtkmnck123.file.core.windows.net/vmtkndi348c20/config
+   Directory<span style="color:#960050;background-color:#1e0010">:</span> https<span style="color:#960050;background-color:#1e0010">:</span>//vtkmnck123.file.core.windows.net/vmtkndi348c20/config
 
 Type                Length Name
 ----                ------ ----
                          1 elasticsearch.yml
-</code></pre>
-
+</code></pre></div>
 
 
     

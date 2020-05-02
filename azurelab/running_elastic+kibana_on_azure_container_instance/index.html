@@ -51,93 +51,75 @@
 
     <h1 class="animated flipInX"><a href="https://kuzhao.github.io/azurelab/running_elastic&#43;kibana_on_azure_container_instance/">Running Elastic&#43;Kibana on Azure Container Instance</a></h1>
     <p class="post-info animated fadeIn">300 Words | Approximately 2 Minutes Read | Last Modified on September 8, 2019
-    
-
-<h3 id="start-from-azure-quickstart-templates-201-aci-wordpress-https-github-com-azure-azure-quickstart-templates-git">Start from <a href="https://github.com/Azure/azure-quickstart-templates.git">azure-quickstart-templates\201-aci-wordpress</a></h3>
-
-<pre><code class="language-json">&quot;containers&quot;: [
+    <h3 id="start-from-azure-quickstart-templates201-aci-wordpresshttpsgithubcomazureazure-quickstart-templatesgit">Start from <a href="https://github.com/Azure/azure-quickstart-templates.git">azure-quickstart-templates\201-aci-wordpress</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;containers&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
   {
-    &quot;name&quot;: &quot;elasticsearch&quot;,
-    &quot;properties&quot;: {
-      &quot;image&quot;: &quot;elasticsearch:7.3.1&quot;,
-      &quot;resources&quot;: {
-        &quot;requests&quot;: {
-          &quot;cpu&quot;: &quot;[variables('cpuCores')]&quot;,
-          &quot;memoryInGb&quot;: &quot;[variables('memoryInGb')]&quot;
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;elasticsearch&#34;</span>,
+    <span style="color:#f92672">&#34;properties&#34;</span>: {
+      <span style="color:#f92672">&#34;image&#34;</span>: <span style="color:#e6db74">&#34;elasticsearch:7.3.1&#34;</span>,
+      <span style="color:#f92672">&#34;resources&#34;</span>: {
+        <span style="color:#f92672">&#34;requests&#34;</span>: {
+          <span style="color:#f92672">&#34;cpu&#34;</span>: <span style="color:#e6db74">&#34;[variables(&#39;cpuCores&#39;)]&#34;</span>,
+          <span style="color:#f92672">&#34;memoryInGb&#34;</span>: <span style="color:#e6db74">&#34;[variables(&#39;memoryInGb&#39;)]&#34;</span>
         }
       }
     }
   },
   {
-    &quot;name&quot;: &quot;kibana&quot;,
-    &quot;properties&quot;: {
-      &quot;image&quot;: &quot;kibana:7.3.1&quot;,
-      &quot;ports&quot;: [
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;kibana&#34;</span>,
+    <span style="color:#f92672">&#34;properties&#34;</span>: {
+      <span style="color:#f92672">&#34;image&#34;</span>: <span style="color:#e6db74">&#34;kibana:7.3.1&#34;</span>,
+      <span style="color:#f92672">&#34;ports&#34;</span>: [
         {
-          &quot;protocol&quot;: &quot;Tcp&quot;,
-          &quot;port&quot;: 5601
+          <span style="color:#f92672">&#34;protocol&#34;</span>: <span style="color:#e6db74">&#34;Tcp&#34;</span>,
+          <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">5601</span>
         }
       ],
-      &quot;environmentVariables&quot;: [
+      <span style="color:#f92672">&#34;environmentVariables&#34;</span>: [
         {
-          &quot;name&quot;: &quot;ELASTICSEARCH_HOSTS&quot;,
-          &quot;value&quot;: &quot;http://127.0.0.1:9200&quot;
+          <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;ELASTICSEARCH_HOSTS&#34;</span>,
+          <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;http://127.0.0.1:9200&#34;</span>
         }
       ],
-      &quot;resources&quot;: {
-        &quot;requests&quot;: {
-          &quot;cpu&quot;: &quot;[variables('cpuCores')]&quot;,
-          &quot;memoryInGb&quot;: &quot;[variables('memoryInGb')]&quot;
+      <span style="color:#f92672">&#34;resources&#34;</span>: {
+        <span style="color:#f92672">&#34;requests&#34;</span>: {
+          <span style="color:#f92672">&#34;cpu&#34;</span>: <span style="color:#e6db74">&#34;[variables(&#39;cpuCores&#39;)]&#34;</span>,
+          <span style="color:#f92672">&#34;memoryInGb&#34;</span>: <span style="color:#e6db74">&#34;[variables(&#39;memoryInGb&#39;)]&#34;</span>
         }
       }
     }
   }
 ]
-</code></pre>
-
-<h3 id="failed-at-starting-elasticsearch">Failed at starting elasticsearch:</h3>
-
+</code></pre></div><h3 id="failed-at-starting-elasticsearch">Failed at starting elasticsearch:</h3>
 <pre><code>ERROR: [2] bootstrap checks failed  
 [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 [2]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured
-</code></pre>
-
-<p><strong>Planned solution</strong><br />
-[1] &lt;= Increase container RAM to 3GB<br />
+</code></pre><p><strong>Planned solution</strong><br>
+[1] &lt;= Increase container RAM to 3GB<br>
 [2] &lt;= Add &ldquo;environmentVariables&rdquo;:</p>
-
-<pre><code class="language-json">&quot;environmentVariables&quot;:[
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;environmentVariables&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>[
   {
-    &quot;name&quot;: &quot;discovery.type&quot;,
-    &quot;value&quot;: &quot;single-node&quot;
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;discovery.type&#34;</span>,
+    <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;single-node&#34;</span>
   }
 ]
-</code></pre>
-
-<p>Deployment still Failing :</p>
-
+</code></pre></div><p>Deployment still Failing :</p>
 <pre><code>Deployment failed. Correlation ID: 1608e8d7-3af1-4cac-bfe1-22276ccf114a. {
     &quot;code&quot;: &quot;InvalidContainerEnvironmentVariable&quot;,
     &quot;message&quot;: &quot;The environment variable name in container 'elasticsearch' of container group 'wordpress-containerinstance' is invalid. A valid environment variable name must start with alphabetic character or '_', followed by a string of alphanumeric characters or '_' (e.g. 'my_name',  or 'MY_NAME',  or 'MyName').&quot;
 }
-</code></pre>
-
-<h3 id="fix-envvar-format-replacing-with-not-working">Fix envvar format(replacing &lsquo;.&rsquo; with &lsquo;_&lsquo;), not working</h3>
-
+</code></pre><h3 id="fix-envvar-formatreplacing--with-_-not-working">Fix envvar format(replacing &lsquo;.&rsquo; with &lsquo;_'), not working</h3>
 <ul>
-<li>Elasticsearch does not honor this env as part of settings.<br /></li>
+<li>Elasticsearch does not honor this env as part of settings.</li>
 <li>Also, cannot modify existing containerGroup:</li>
 </ul>
-
 <pre><code>Deployment failed. Correlation ID: a47f7215-8cb9-45e3-97ec-5b86aef3b465. {
   &quot;error&quot;: {        
     &quot;code&quot;: &quot;InvalidContainerGroupUpdate&quot;,
     &quot;message&quot;: &quot;The updates on container group 'wordpress-containerinstance' are invalid. If you are going to update the os type, restart policy, network profile, CPU, memory or GPU resources for a container group, you must delete it first and then create a new one.&quot;
   }
 }
-</code></pre>
-
-<p>Potential solution: pass in volume that holds elasticsearch config</p>
+</code></pre><p>Potential solution: pass in volume that holds elasticsearch config</p>
 
 
 
