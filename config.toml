@@ -3,7 +3,7 @@ languageCode = "en-us"
 title = "DuckDuck Go!"
 canonifyURLs = true
 enableEmoji = true
-theme="pristine"
+theme="anatole"
 [params]
     portrait = "img/021002-O-9999G-015.jpg"
 [[menu.main]]
