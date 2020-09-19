@@ -1,57 +1,98 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title>  | How to access/upload to Windows Azure Files in PowerShell </title>
 
-
-
- <html class="no-js" lang=""> 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>DuckDuck Go!</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Serif+Pro|Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" crossorigin="anonymous">
-
-  <link rel="stylesheet" href=https://kuzhao.github.io/css/main.css>
-  <link rel="stylesheet" href=https://kuzhao.github.io/css/magnific-popup.css>
-
-  
-
-
-<html>
-  <body lang="en">
-  
-
-
-  <div id="main">
     
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.75.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="">
+    
+    <link rel="stylesheet"
+          href="https://kuzhao.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-<div id="nav">
-  
-  <a href="https://kuzhao.github.io/img/021002-O-9999G-015.jpg" class="image-link">
-    <img class="logo animated flipInY" src="https://kuzhao.github.io/img/021002-O-9999G-015.jpg"/>
-  </a>
-  
-  
-  <ul>
     
-      <li><a href="https://kuzhao.github.io/">
-          <span>Home</span>
-      </a></li>
-    
-      <li><a href="https://kuzhao.github.io/azurelab">
-          <span>AzureLab</span>
-      </a></li>
-    
-  </ul>
+    <link rel="shortcut icon" href="https://kuzhao.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://kuzhao.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://kuzhao.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://kuzhao.github.io/favicon-16x16.png">
 
+    <link rel="canonical" href="https://kuzhao.github.io/azurelab/how_to_access_upload_to_windowsazurefiles/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://kuzhao.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to access/upload to Windows Azure Files in PowerShell"/>
+<meta name="twitter:description" content="Install Az Module for PwShell Install-Module -Name Az -AllowClobber -Scope AllUsers Import Az.Storage PS C:\Users\admin&gt; Import-Module Az.Storage PS C:\Users\admin&gt; Get-Module ModuleType Version Name ExportedCommands ---------- ------- ---- ---------------- Script 1.6.2 Az.Accounts {Add-AzEnvironment, Clear-AzContext, Clear-AzDefault, Conn... Script 1.6.0 Az.Storage {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa... ... Login to Azure account PS C:\Users\admin&gt; Connect-AzAccount Account SubscriptionName TenantId Environment ------- ---------------- -------- ----------- AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud Initialize storage access  Get storage access key Create storage context  $key=PS C:\Users\admin&gt; $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123 PS C:\Users\admin&gt; $key."/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://kuzhao.github.io/" alt="profile picture">
+            <h3 title=""><a href="https://kuzhao.github.io/"></a></h3>
+            <div class="description">
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy;  2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="https://kuzhao.github.io/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="https://kuzhao.github.io/azurelab"
+                        
+                   title="">AzureLab</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
 </div>
 
-    <h1 class="animated flipInX"><a href="https://kuzhao.github.io/azurelab/how_to_access_upload_to_windowsazurefiles/">How to access/upload to Windows Azure Files in PowerShell</a></h1>
-    <p class="post-info animated fadeIn">300 Words | Approximately 2 Minutes Read | Last Modified on September 8, 2019
-    <h3 id="install-az-module-for-pwshell">Install Az Module for PwShell</h3>
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>How to access/upload to Windows Azure Files in PowerShell</h3>
+                
+            </div>
+
+            <h3 id="install-az-module-for-pwshell">Install Az Module for PwShell</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">Install-Module -Name Az -AllowClobber -Scope AllUsers
 </code></pre></div><h3 id="import-azstorage">Import Az.Storage</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">PS C:\Users\admin&gt; Import-Module Az.Storage
@@ -128,76 +169,39 @@ Type                Length Name
 ----                ------ ----
                          1 elasticsearch.yml
 </code></pre></div>
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+    </div>
 
 
-    
-        <div class="social">
-  
-    <div>
-        <a href="https://www.linkedin.com/in/andy-zhao-405a8156">LN</a>
+        </div>
     </div>
-  
-    <div>
-        <a href="https://github.com/kuzhao">Github</a>
-    </div>
-  
 </div>
 
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
 
 
-    
-  </div>
-
-  
 
 
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
 
-<div id="sidebar">
-  
-  <a href="https://kuzhao.github.io/img/021002-O-9999G-015.jpg" class="image-link">
-    <img class="logo animated flipInY" src="https://kuzhao.github.io/img/021002-O-9999G-015.jpg"/>
-  </a>
-  
-
-  <h2>URLs</h2>
-  <ul>
-    
-      <li><a href="https://kuzhao.github.io/">Home</a></li>
-    
-      <li><a href="https://kuzhao.github.io/azurelab">AzureLab</a></li>
-    
-  </ul>
-
-  <h2>Recent posts</h2>
-  <ul>
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </ul>
-
-  <h2>Projects</h2>
-  <ul>
-    
-  </ul>
-</div>
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src=https://kuzhao.github.io/js/jquery-1.11.2.min.js></script>
-  <script src=https://kuzhao.github.io/js/main.js></script>
-
-  
-  <script src=https://kuzhao.github.io/js/jquery.magnific-popup.min.js></script>
-
-  
-  
-
-  
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
 </body>
-</html>
 
+</html>
