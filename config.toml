@@ -1,11 +1,12 @@
 baseURL = "https://kuzhao.github.io/"
 languageCode = "en-us"
-title = "DuckDuck Go!"
 canonifyURLs = true
 enableEmoji = true
 theme="anatole"
 [params]
-    portrait = "img/021002-O-9999G-015.jpg"
+    title = "DuckDuck Go!"
+    description = "Record the Discoveries"
+    profilePicture = "img/021002-O-9999G-015.jpg"
 [[menu.main]]
   name = "Home"
   url = "/"
@@ -16,9 +17,11 @@ theme="anatole"
   url = "/azurelab"
   weight = 2
 
-[[params.social]]
+[[params.socialIcons]]
+    icon = "fa-linkedin"
     title = "LN"
     url = "https://www.linkedin.com/in/andy-zhao-405a8156"
-[[params.social]]
+[[params.socialIcons]]
+    icon = "fa-github"
     title = "Github"
     url = "https://github.com/kuzhao"
