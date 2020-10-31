@@ -1,3 +1,8 @@
+---
+title: "How to isolate pods of different services"
+date: 2020-10-31T14:47:11+08:00
+draft: false
+---
 ## Objective:
 1. Pods from different service deployments should never run on the same node.
 2. Pods of the same deployment should stay on the same node preferably.
