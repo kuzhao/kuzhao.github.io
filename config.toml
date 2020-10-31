@@ -17,6 +17,11 @@ theme="anatole"
   url = "/azurelab"
   weight = 2
 
+[[menu.main]]
+  name = "k8s"
+  url = "/k8s"
+  weight = 2
+
 [[params.socialIcons]]
     icon = "fa-linkedin"
     title = "LN"
