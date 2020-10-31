@@ -124,44 +124,44 @@ We should then use requiredDuringSchedulingIgnoredDuringExecution for AntiAffini
 <li>AntiAffinity codes should look like below, so that a pod will NOT run on a node where pods with a different service label are running:</li>
 </ul>
 <pre><code>requiredDuringSchedulingIgnoredDuringExecution:
-    - labelSelector:
-              matchExpressions:
-    - key: &lt;pod service label&gt;
-                operator: NotIn
-                values:
-                - &lt;labelValue&gt;
-                topologyKey: kubernetes.io/hostname
+  - labelSelector:
+            matchExpressions:
+  - key: &lt;pod service label&gt;
+              operator: NotIn
+              values:
+              - &lt;labelValue&gt;
+              topologyKey: kubernetes.io/hostname
 </code></pre><ul>
 <li>Affinity codes should look like below:</li>
 </ul>
 <pre><code>preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: component
-                  operator: In
-                  values:
-                  - historical
-              topologyKey: kubernetes.io/hostname
+  - weight: 100
+    podAffinityTerm:
+      labelSelector:
+        matchExpressions:
+        - key: component
+          operator: In
+          values:
+          - historical
+      topologyKey: kubernetes.io/hostname
 </code></pre><ul>
 <li>All good as it seems so far? Almost but here is the trick: will a pod still get scheduled after the autoscaler spawns a new node?</li>
 <li>The test proves to be negative. And the autoscaler even refuses to do that because it does not think a new node will help. And that’s TRUE!</li>
 <li>Back to the hard AntiAffinity part, does it match a new node where nothing is running?<br>
 It does, because no pod service label exists in any pods running on that node.<br>
 As a result, a new pod will never get scheduled on any new nodes created by the cluster autoscaler.</li>
-<li>Let’s add one more constraint to AntiAffinity and make it look like this, which will effectively free a new node and make it schedulable:
-requiredDuringSchedulingIgnoredDuringExecution:</li>
+<li>Let’s add one more constraint to AntiAffinity and make it look like this, which will effectively free a new node and make it schedulable:</li>
 </ul>
-<pre><code>    - labelSelector:
-              matchExpressions:
-                - key: &lt;pod service label&gt;
-                operator: Exists
-    - key: &lt;pod service label&gt;
-                operator: NotIn
-                values:
-                - &lt;labelValue&gt;
-                topologyKey: kubernetes.io/hostname
+<pre><code>requiredDuringSchedulingIgnoredDuringExecution:
+  - labelSelector:
+            matchExpressions:
+              - key: &lt;pod service label&gt;
+              operator: Exists
+  - key: &lt;pod service label&gt;
+              operator: NotIn
+              values:
+              - &lt;labelValue&gt;
+              topologyKey: kubernetes.io/hostname
 </code></pre><ul>
 <li>The test passed!
 <ul>
