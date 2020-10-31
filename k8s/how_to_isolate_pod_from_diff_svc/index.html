@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme=""><head>
-    <title>  </title>
+    <title>  | How to isolate pods of different services </title>
 
     
     <meta charset="utf-8"><meta name="generator" content="Hugo 0.75.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -30,7 +30,7 @@
             integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
             crossorigin="anonymous"></script>
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=""/>
+<meta name="twitter:title" content="How to isolate pods of different services"/>
 <meta name="twitter:description" content="Objective:  Pods from different service deployments should never run on the same node. Pods of the same deployment should stay on the same node preferably. The above should work after node autoscaling happens.  Pathfinding:  Req #1 repels pods from the node running ones of a different service &ndash;&gt; hard podAntiAffinity Req #2 collects pods under the same service and runs them on the same node at the best &ndash;&gt; soft podAffinity We should then use requiredDuringSchedulingIgnoredDuringExecution for AntiAffinity and preferredDuringSchedulingIgnoredDuringExecution for Affinity AntiAffinity codes should look like below, so that a pod will NOT run on a node where pods with a different service label are running:  requiredDuringSchedulingIgnoredDuringExecution: - labelSelector: matchExpressions: - key: &lt;pod service label&gt; operator: NotIn values: - &lt;labelValue&gt; topologyKey: kubernetes."/>
 
 </head>
@@ -106,7 +106,7 @@
         <div class="post-content">
 
             <div class="post-title">
-                <h3></h3>
+                <h3>How to isolate pods of different services</h3>
                 
             </div>
 

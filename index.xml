@@ -8,6 +8,15 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 06 Sep 2019 03:00:53 +0800</lastBuildDate><atom:link href="https://kuzhao.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>How to isolate pods of different services</title>
+      <link>https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/</link>
+      <pubDate>Sat, 31 Oct 2020 14:47:11 +0800</pubDate>
+      
+      <guid>https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/</guid>
+      <description>Objective:  Pods from different service deployments should never run on the same node. Pods of the same deployment should stay on the same node preferably. The above should work after node autoscaling happens.  Pathfinding:  Req #1 repels pods from the node running ones of a different service &amp;ndash;&amp;gt; hard podAntiAffinity Req #2 collects pods under the same service and runs them on the same node at the best &amp;ndash;&amp;gt; soft podAffinity We should then use requiredDuringSchedulingIgnoredDuringExecution for AntiAffinity and preferredDuringSchedulingIgnoredDuringExecution for Affinity AntiAffinity codes should look like below, so that a pod will NOT run on a node where pods with a different service label are running:  requiredDuringSchedulingIgnoredDuringExecution: - labelSelector: matchExpressions: - key: &amp;lt;pod service label&amp;gt; operator: NotIn values: - &amp;lt;labelValue&amp;gt; topologyKey: kubernetes.</description>
+    </item>
+    
+    <item>
       <title>How to send and receive events with EventHub in Azure Databricks</title>
       <link>https://kuzhao.github.io/azurelab/how_to_send_receive_eh_db/</link>
       <pubDate>Tue, 24 Sep 2019 08:42:11 +0800</pubDate>
@@ -49,15 +58,6 @@ Explanation on the code I composed both py files based on the example azure-sdk-
       
       <guid>https://kuzhao.github.io/azurelab/running_elastic&#43;kibana_on_azure_container_instance/</guid>
       <description>Start from azure-quickstart-templates\201-aci-wordpress &amp;#34;containers&amp;#34;: [ { &amp;#34;name&amp;#34;: &amp;#34;elasticsearch&amp;#34;, &amp;#34;properties&amp;#34;: { &amp;#34;image&amp;#34;: &amp;#34;elasticsearch:7.3.1&amp;#34;, &amp;#34;resources&amp;#34;: { &amp;#34;requests&amp;#34;: { &amp;#34;cpu&amp;#34;: &amp;#34;[variables(&amp;#39;cpuCores&amp;#39;)]&amp;#34;, &amp;#34;memoryInGb&amp;#34;: &amp;#34;[variables(&amp;#39;memoryInGb&amp;#39;)]&amp;#34; } } } }, { &amp;#34;name&amp;#34;: &amp;#34;kibana&amp;#34;, &amp;#34;properties&amp;#34;: { &amp;#34;image&amp;#34;: &amp;#34;kibana:7.3.1&amp;#34;, &amp;#34;ports&amp;#34;: [ { &amp;#34;protocol&amp;#34;: &amp;#34;Tcp&amp;#34;, &amp;#34;port&amp;#34;: 5601 } ], &amp;#34;environmentVariables&amp;#34;: [ { &amp;#34;name&amp;#34;: &amp;#34;ELASTICSEARCH_HOSTS&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;http://127.0.0.1:9200&amp;#34; } ], &amp;#34;resources&amp;#34;: { &amp;#34;requests&amp;#34;: { &amp;#34;cpu&amp;#34;: &amp;#34;[variables(&amp;#39;cpuCores&amp;#39;)]&amp;#34;, &amp;#34;memoryInGb&amp;#34;: &amp;#34;[variables(&amp;#39;memoryInGb&amp;#39;)]&amp;#34; } } } } ] Failed at starting elasticsearch: ERROR: [2] bootstrap checks failed [1]: max virtual memory areas vm.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/</guid>
-      <description>Objective:  Pods from different service deployments should never run on the same node. Pods of the same deployment should stay on the same node preferably. The above should work after node autoscaling happens.  Pathfinding:  Req #1 repels pods from the node running ones of a different service &amp;ndash;&amp;gt; hard podAntiAffinity Req #2 collects pods under the same service and runs them on the same node at the best &amp;ndash;&amp;gt; soft podAffinity We should then use requiredDuringSchedulingIgnoredDuringExecution for AntiAffinity and preferredDuringSchedulingIgnoredDuringExecution for Affinity AntiAffinity codes should look like below, so that a pod will NOT run on a node where pods with a different service label are running:  requiredDuringSchedulingIgnoredDuringExecution: - labelSelector: matchExpressions: - key: &amp;lt;pod service label&amp;gt; operator: NotIn values: - &amp;lt;labelValue&amp;gt; topologyKey: kubernetes.</description>
     </item>
     
   </channel>
