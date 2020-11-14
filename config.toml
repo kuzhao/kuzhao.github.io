@@ -2,6 +2,7 @@ baseURL = "https://kuzhao.github.io/"
 languageCode = "en-us"
 canonifyURLs = true
 enableEmoji = true
+enableRobotsTXT = true
 theme="anatole"
 [params]
     title = "DuckDuck Go!"
