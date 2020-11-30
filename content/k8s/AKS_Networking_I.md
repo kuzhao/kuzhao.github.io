@@ -1,6 +1,6 @@
 ---
 title: "AKS Networking Illustrated, Part I"
-date: 2020-11-30T14:37:11+08:00
+date: 2020-11-30T11:37:11+08:00
 draft: false
 ---
 It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works. I hope these articles will help work in multiple roles ranging from cloud solution architecting to AKS cluster administration. 
