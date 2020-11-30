@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/</loc>
-    <lastmod>2020-10-31T14:47:11+08:00</lastmod>
+    <loc>https://kuzhao.github.io/k8s/aks_networking_i/</loc>
+    <lastmod>2020-11-30T11:37:11+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://kuzhao.github.io/k8s/</loc>
+    <lastmod>2020-11-30T11:37:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/</loc>
     <lastmod>2020-10-31T14:47:11+08:00</lastmod>
   </url>
   

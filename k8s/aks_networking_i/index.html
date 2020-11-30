@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title>  | AKS Networking Illustrated, Part I </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.75.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Record the Discoveries">
+    
+    <link rel="stylesheet"
+          href="https://kuzhao.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://kuzhao.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://kuzhao.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://kuzhao.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://kuzhao.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://kuzhao.github.io/k8s/aks_networking_i/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://kuzhao.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AKS Networking Illustrated, Part I"/>
+<meta name="twitter:description" content="It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works. I hope these articles will help work in multiple roles ranging from cloud solution architecting to AKS cluster administration.
+I will talk about its networking as the start. And there will be three parts on this subtopic, each corresponding to one article in this series."/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://kuzhao.github.io/img/021002-O-9999G-015.jpg" alt="profile picture">
+            <h3 title=""><a href="https://kuzhao.github.io/">DuckDuck Go!</a></h3>
+            <div class="description">
+                <p>Record the Discoveries</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://www.linkedin.com/in/andy-zhao-405a8156" rel="me" aria-label="LN">
+                    <i class="fa fa-2x fa-linkedin" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/kuzhao" rel="me" aria-label="Github">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy;  2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="https://kuzhao.github.io/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="https://kuzhao.github.io/azurelab"
+                        
+                   title="">AzureLab</a></li>
+        
+            
+            <li><a 
+                   href="https://kuzhao.github.io/k8s"
+                        
+                   title="">k8s</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>AKS Networking Illustrated, Part I</h3>
+                
+            </div>
+
+            <p>It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works. I hope these articles will help work in multiple roles ranging from cloud solution architecting to AKS cluster administration.</p>
+<p>I will talk about its <strong>networking</strong> as the start. And there will be three parts on this subtopic, each corresponding to one article in this series.
+This will be intended for: a) people managing and monitoring their clusters; b) networking experts interested in enriching their knowledge arsenal with microservice networking; c) Azure project executors who are about to implement great Azure solutions.</p>
+<h3 id="overview">Overview</h3>
+<p>Let&rsquo;s first set the perimeter to properly scope what to discuss.</p>
+<ul>
+<li>It is only about an AKS cluster, rather than an on-premise one or a cluster offered by GCE or AWS</li>
+<li>We will not examine K8s master logic and control plane components such as api server and controller manager.</li>
+<li>We will not discuss anything related to applications and workloads, even if some of them, like Istio and Nginx ingress, offer networking related services.</li>
+</ul>
+<p>In this series, we will first check and name concepts and types of resources involved in any AKS networking operations or functionalities in Part I. In Part II as the next step, we will focus on the K8s concept &ndash; a service object, which works essentially as the entry for the largest percentage of cluster traffic. We will then further categorize cluster traffic into various kinds and break them up for analysis.
+Lastly, we will take the cloth and dress up as detectives before diving into some of the most bizarre yet resounding symptoms and pitfalls regarding AKS networking.</p>
+<p>&mdash;&mdash;-Part I begins here&mdash;&mdash;&mdash;&mdash;&mdash;-
+Allow me to use my ragged sketch below to name all networking related elements of an AKS cluster.
+<img src="https://kuzhao.github.io/static/aks-net-azure-resource.png" alt="AKS Networking Resources"></p>
+<p>Some highlighted bullets below:</p>
+<ul>
+<li>Typical inbound traffic to the cluster will first hit the frontend address on the Azure load balancer before being distributed to AKS node VMs.</li>
+<li>Just like normal VMs, the subnet NSG and route table apply to all node VMs in the cluster subnet. You can introduce additional per-VM NSGs although they rarely appear in real scenarios.</li>
+<li>You can always introduce an application gateway as the entry point instead of the load balancer. Two use cases: 1) AGW ingress; 2) normal AGW with manually set backends of AKS load balancers. AGW always sits in a different subnet, to which the cluster subnet is reachable.</li>
+<li>The vnet containing the cluster subnet is of no difference from any other vnets. Feel free to config vnet peering, expressroute and VPN gateways for it. Of course, you are also free to use custom DNS servers here.</li>
+</ul>
+<p>I am now moving to node VMs and checking out VM and pod networking there. Depending on the network mode you choose for your cluster, the setups differ from each other a lot.</p>
+<h3 id="kubenet-basic-mode">Kubenet (Basic Mode)</h3>
+<p>This mode is really &ldquo;basic&rdquo; and applies Kubenet, one of the simple network plugins in K8s world. In this mode, each node has only one address from the cluster subnet. You need to set &ldquo;podCIDR&rdquo; when creating the cluster, so that pods get their IPs from this virtual address space.</p>
+<p>There will be a route table resource created and attached to the cluster subnet, though. This is because the podCIDR will be broken into segments and assigned to each node per Kubenet design. As a result, each node will have one entry corresponding to its network segment, with the next hop as its node IP in the route table.</p>
+<h3 id="azurecni-advanced-mode">AzureCNI (Advanced Mode)</h3>
+<p>The pod IP assignment is more straightforward in this mode and you don&rsquo;t even need to specify the podCIDR. In contrast to Basic Mode, pods get their addresses directly from the cluster subnet. This way, the pods and nodes are in the same network address space. As a result, they are all directly addressable within the entire vnet, including peered ones and on-premises with ExpressRoute/S2SVPN in place.</p>
+<p>One of the important features that takes place behind the scenes is: each node is pre-assigned with a number of subnet addresses equal to pod count per node in cluster config (default to 30). Therefore, the subnet address space restricts the number of nodes you can have.  It is also wise to set aside spare addresses for another node in case of a cluster upgrade.</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
