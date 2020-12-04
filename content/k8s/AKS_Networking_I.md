@@ -19,7 +19,7 @@ Lastly, we will take the cloth and dress up as detectives before diving into som
 
 -------Part I begins here----------------
 Allow me to use my ragged sketch below to name all networking related elements of an AKS cluster.
-![AKS Networking Resources](/static/aks-net-azure-resource.png)
+![AKS Networking Resources](/img/aks-net-azure-resource.png)
 
 Some highlighted bullets below:
 - Typical inbound traffic to the cluster will first hit the frontend address on the Azure load balancer before being distributed to AKS node VMs.
