@@ -9,15 +9,16 @@ I will talk about its **networking** as the start. And there will be three parts
 This will be intended for: a) people managing and monitoring their clusters; b) networking experts interested in enriching their knowledge arsenal with microservice networking; c) Azure project executors who are about to implement great Azure solutions.
 
 ### Overview
-Let's first set the perimeter to properly scope what to discuss. 
+Let's first set the perimeter to properly scope what to discuss.
 - It is only about an AKS cluster, rather than an on-premise one or a cluster offered by GCE or AWS
 - We will not examine K8s master logic and control plane components such as api server and controller manager.
 - We will not discuss anything related to applications and workloads, even if some of them, like Istio and Nginx ingress, offer networking related services.
 
-In this series, we will first check and name concepts and types of resources involved in any AKS networking operations or functionalities in Part I. In Part II as the next step, we will focus on the K8s concept -- a service object, which works essentially as the entry for the largest percentage of cluster traffic. We will then further categorize cluster traffic into various kinds and break them up for analysis.
-Lastly, we will take the cloth and dress up as detectives before diving into some of the most bizarre yet resounding symptoms and pitfalls regarding AKS networking.
+In this series, we will first check and name concepts and types of resources involved in any AKS networking operations or functionalities in Part I.  
+In Part II as the next step, we will focus on the K8s concept -- a service object, which works essentially as the entry for the largest percentage of cluster traffic. We will then further categorize cluster traffic into various kinds and break them up for analysis.  
+Lastly in Part III, we will take the cloth and dress up as detectives before diving into some of the most bizarre yet resounding symptoms and pitfalls regarding AKS networking.
 
--------Part I begins here----------------
+---------Part I begins here---------  
 Allow me to use my ragged sketch below to name all networking related elements of an AKS cluster.
 ![AKS Networking Resources](/img/aks-net-azure-resource.png)
 
@@ -35,6 +36,7 @@ This mode is really "basic" and applies Kubenet, one of the simple network plugi
 There will be a route table resource created and attached to the cluster subnet, though. This is because the podCIDR will be broken into segments and assigned to each node per Kubenet design. As a result, each node will have one entry corresponding to its network segment, with the next hop as its node IP in the route table.
 
 ### AzureCNI (Advanced Mode)
-The pod IP assignment is more straightforward in this mode and you don't even need to specify the podCIDR. In contrast to Basic Mode, pods get their addresses directly from the cluster subnet. This way, the pods and nodes are in the same network address space. As a result, they are all directly addressable within the entire vnet, including peered ones and on-premises with ExpressRoute/S2SVPN in place.
+The pod IP assignment is more straightforward in this mode and you don't even need to specify the podCIDR. In contrast to Basic Mode, pods get their addresses directly from the cluster subnet.  
+This way, the pods and nodes are in the same network address space. As a result, they are all directly addressable within the entire vnet, including peered ones and on-premises with ExpressRoute/S2SVPN in place.
 
 One of the important features that takes place behind the scenes is: each node is pre-assigned with a number of subnet addresses equal to pod count per node in cluster config (default to 30). Therefore, the subnet address space restricts the number of nodes you can have.  It is also wise to set aside spare addresses for another node in case of a cluster upgrade.
