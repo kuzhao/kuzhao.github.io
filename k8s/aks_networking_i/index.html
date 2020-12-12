@@ -114,7 +114,7 @@ I will talk about its networking as the start. And there will be three parts on 
             <p>It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works. I hope these articles will help work in multiple roles ranging from cloud solution architecting to AKS cluster administration.</p>
 <p>I will talk about its <strong>networking</strong> as the start. And there will be three parts on this subtopic, each corresponding to one article in this series.
 This will be intended for: a) people managing and monitoring their clusters; b) networking experts interested in enriching their knowledge arsenal with microservice networking; c) Azure project executors who are about to implement great Azure solutions.</p>
-<h3 id="overview">Overview</h3>
+<h4 id="overview-of-this-networking-series">Overview of this networking series</h4>
 <p>Let&rsquo;s first set the perimeter to properly scope what to discuss.</p>
 <ul>
 <li>It is only about an AKS cluster, rather than an on-premise one or a cluster offered by GCE or AWS</li>
@@ -124,8 +124,8 @@ This will be intended for: a) people managing and monitoring their clusters; b) 
 <p>In this series, we will first check and name concepts and types of resources involved in any AKS networking operations or functionalities in Part I.<br>
 In Part II as the next step, we will focus on the K8s concept &ndash; a service object, which works essentially as the entry for the largest percentage of cluster traffic. We will then further categorize cluster traffic into various kinds and break them up for analysis.<br>
 Lastly in Part III, we will take the cloth and dress up as detectives before diving into some of the most bizarre yet resounding symptoms and pitfalls regarding AKS networking.</p>
-<p>&mdash;&mdash;&mdash;Part I begins here&mdash;&mdash;&mdash;<br>
-Allow me to use my ragged sketch below to name all networking related elements of an AKS cluster.
+<h3 id="part-i-begins-here">Part I begins here</h3>
+<p>Allow me to use my ragged sketch below to name all networking related elements of an AKS cluster.
 <img src="https://kuzhao.github.io/img/aks-net-azure-resource.png" alt="AKS Networking Resources"></p>
 <p>Some highlighted bullets below:</p>
 <ul>
@@ -135,10 +135,10 @@ Allow me to use my ragged sketch below to name all networking related elements o
 <li>The vnet containing the cluster subnet is of no difference from any other vnets. Feel free to config vnet peering, expressroute and VPN gateways for it. Of course, you are also free to use custom DNS servers here.</li>
 </ul>
 <p>I am now moving to node VMs and checking out VM and pod networking there. Depending on the network mode you choose for your cluster, the setups differ from each other a lot.</p>
-<h3 id="kubenet-basic-mode">Kubenet (Basic Mode)</h3>
+<h4 id="kubenet-basic-mode">Kubenet (Basic Mode)</h4>
 <p>This mode is really &ldquo;basic&rdquo; and applies Kubenet, one of the simple network plugins in K8s world. In this mode, each node has only one address from the cluster subnet. You need to set &ldquo;podCIDR&rdquo; when creating the cluster, so that pods get their IPs from this virtual address space.</p>
 <p>There will be a route table resource created and attached to the cluster subnet, though. This is because the podCIDR will be broken into segments and assigned to each node per Kubenet design. As a result, each node will have one entry corresponding to its network segment, with the next hop as its node IP in the route table.</p>
-<h3 id="azurecni-advanced-mode">AzureCNI (Advanced Mode)</h3>
+<h4 id="azurecni-advanced-mode">AzureCNI (Advanced Mode)</h4>
 <p>The pod IP assignment is more straightforward in this mode and you don&rsquo;t even need to specify the podCIDR. In contrast to Basic Mode, pods get their addresses directly from the cluster subnet.<br>
 This way, the pods and nodes are in the same network address space. As a result, they are all directly addressable within the entire vnet, including peered ones and on-premises with ExpressRoute/S2SVPN in place.</p>
 <p>One of the important features that takes place behind the scenes is: each node is pre-assigned with a number of subnet addresses equal to pod count per node in cluster config (default to 30). Therefore, the subnet address space restricts the number of nodes you can have.  It is also wise to set aside spare addresses for another node in case of a cluster upgrade.</p>
