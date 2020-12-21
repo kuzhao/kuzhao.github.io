@@ -31,8 +31,7 @@
             crossorigin="anonymous"></script>
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AKS Networking Illustrated, Part II"/>
-<meta name="twitter:description" content="AKS Networking, illustrated &ndash; Part II
-Ok on this part, we will go over a few details on traffic in/out the cluster. Let&rsquo;s start where incoming traffic hits cluster services &ndash; the load balancer.
+<meta name="twitter:description" content="Ok on this part, we will go over a few details on traffic in/out the cluster. Let&rsquo;s start where incoming traffic hits cluster services &ndash; the load balancer.
 We know from K8s concepts that a cluster service needs to be &ldquo;exposed&rdquo; before a client can touch it. Furthermore, the service should be exposed via either &ldquo;NodePort&rdquo; or &ldquo;LoadBalancer&rdquo; to serve external requests.
 While &ldquo;NodePort&rdquo; generally applies to all kinds of infrastructure, &ldquo;LoadBalancer&rdquo; does introduce differences at implementation."/>
 
@@ -113,8 +112,7 @@ While &ldquo;NodePort&rdquo; generally applies to all kinds of infrastructure, &
                 
             </div>
 
-            <p>AKS Networking, illustrated &ndash; Part II</p>
-<p>Ok on this part, we will go over a few details on traffic in/out the cluster. Let&rsquo;s start where incoming traffic hits cluster services &ndash; the load balancer.</p>
+            <p>Ok on this part, we will go over a few details on traffic in/out the cluster. Let&rsquo;s start where incoming traffic hits cluster services &ndash; the load balancer.</p>
 <p>We know from K8s concepts that a cluster service needs to be &ldquo;exposed&rdquo; before a client can touch it. Furthermore, the service should be exposed via either &ldquo;NodePort&rdquo; or &ldquo;LoadBalancer&rdquo; to serve external requests.<br>
 While &ldquo;NodePort&rdquo; generally applies to all kinds of infrastructure, &ldquo;LoadBalancer&rdquo; does introduce differences at implementation. After all, there are many ways to distribute requests over backend nodes. In AKS, it is implemented through a common type of Azure resource, Azure Load Balancer.<br>
 I love my whiteboard a lot! See the conceptual and illustrative drawing below.<br>
