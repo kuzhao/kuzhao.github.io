@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://kuzhao.github.io/k8s/aks_networking_i/</loc>
-    <lastmod>2020-11-30T11:37:11+08:00</lastmod>
+    <loc>https://kuzhao.github.io/k8s/aks_networking_ii/</loc>
+    <lastmod>2020-12-21T11:15:11+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://kuzhao.github.io/k8s/</loc>
+    <lastmod>2020-12-21T11:15:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuzhao.github.io/k8s/aks_networking_i/</loc>
     <lastmod>2020-11-30T11:37:11+08:00</lastmod>
   </url>
   
@@ -45,10 +50,6 @@
   <url>
     <loc>https://kuzhao.github.io/</loc>
     <lastmod>2019-09-06T03:00:53+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kuzhao.github.io/k8s/aks_networking_ii/</loc>
   </url>
   
   <url>

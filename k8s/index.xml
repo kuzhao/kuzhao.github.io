@@ -6,7 +6,19 @@
     <description>Recent content in K8s on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Nov 2020 11:37:11 +0800</lastBuildDate><atom:link href="https://kuzhao.github.io/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Dec 2020 11:15:11 +0800</lastBuildDate><atom:link href="https://kuzhao.github.io/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AKS Networking Illustrated, Part II</title>
+      <link>https://kuzhao.github.io/k8s/aks_networking_ii/</link>
+      <pubDate>Mon, 21 Dec 2020 11:15:11 +0800</pubDate>
+      
+      <guid>https://kuzhao.github.io/k8s/aks_networking_ii/</guid>
+      <description>AKS Networking, illustrated &amp;ndash; Part II
+Ok on this part, we will go over a few details on traffic in/out the cluster. Let&amp;rsquo;s start where incoming traffic hits cluster services &amp;ndash; the load balancer.
+We know from K8s concepts that a cluster service needs to be &amp;ldquo;exposed&amp;rdquo; before a client can touch it. Furthermore, the service should be exposed via either &amp;ldquo;NodePort&amp;rdquo; or &amp;ldquo;LoadBalancer&amp;rdquo; to serve external requests.
+While &amp;ldquo;NodePort&amp;rdquo; generally applies to all kinds of infrastructure, &amp;ldquo;LoadBalancer&amp;rdquo; does introduce differences at implementation.</description>
+    </item>
+    
     <item>
       <title>AKS Networking Illustrated, Part I</title>
       <link>https://kuzhao.github.io/k8s/aks_networking_i/</link>
@@ -24,18 +36,6 @@ I will talk about its networking as the start. And there will be three parts on 
       
       <guid>https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/</guid>
       <description>Objective:  Pods from different service deployments should never run on the same node. Pods of the same deployment should stay on the same node preferably. The above should work after node autoscaling happens.  Pathfinding:  Req #1 repels pods from the node running ones of a different service &amp;ndash;&amp;gt; hard podAntiAffinity Req #2 collects pods under the same service and runs them on the same node at the best &amp;ndash;&amp;gt; soft podAffinity</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://kuzhao.github.io/k8s/aks_networking_ii/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kuzhao.github.io/k8s/aks_networking_ii/</guid>
-      <description>AKS Networking, illustrated &amp;ndash; Part II
-Ok on this part, we will go over a few details on traffic in/out the cluster. Let&amp;rsquo;s start where incoming traffic hits cluster services &amp;ndash; the load balancer.
-We know from K8s concepts that a cluster service needs to be &amp;ldquo;exposed&amp;rdquo; before a client can touch it. Furthermore, the service should be exposed via either &amp;ldquo;NodePort&amp;rdquo; or &amp;ldquo;LoadBalancer&amp;rdquo; to serve external requests.
-While &amp;ldquo;NodePort&amp;rdquo; generally applies to all kinds of infrastructure, &amp;ldquo;LoadBalancer&amp;rdquo; does introduce differences at implementation.</description>
     </item>
     
   </channel>
