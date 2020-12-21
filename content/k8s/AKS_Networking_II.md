@@ -3,8 +3,6 @@ title: "AKS Networking Illustrated, Part II"
 date: 2020-12-21T11:15:11+08:00
 draft: false
 ---
-AKS Networking, illustrated -- Part II
-
 Ok on this part, we will go over a few details on traffic in/out the cluster. Let's start where incoming traffic hits cluster services -- the load balancer.
 
 We know from K8s concepts that a cluster service needs to be "exposed" before a client can touch it. Furthermore, the service should be exposed via either "NodePort" or "LoadBalancer" to serve external requests.  
