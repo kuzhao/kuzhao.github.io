@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme=""><head>
+    <title>  </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.75.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Record the Discoveries">
+    
+    <link rel="stylesheet"
+          href="https://kuzhao.github.io/css/style.min.ec15cff0912041d0dce3a88999b9424990bd24473761645397583776684cdc3b.css"
+          integrity="sha256-7BXP8JEgQdDc46iJmblCSZC9JEc3YWRTl1g3dmhM3Ds="
+          crossorigin="anonymous"
+          type="text/css"><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+    <link rel="shortcut icon" href="https://kuzhao.github.io/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://kuzhao.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://kuzhao.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://kuzhao.github.io/favicon-16x16.png">
+
+    <link rel="canonical" href="https://kuzhao.github.io/k8s/aks_networking_ii/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="https://kuzhao.github.io/js/anatole-header.min.e782db136ec18d105a4552702eac49f4620d6867da3fbf808bd53e806c96be6e.js"
+            integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
+            crossorigin="anonymous"></script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="AKS Networking, illustrated &ndash; Part II
+Ok on this part, we will go over a few details on traffic in/out the cluster. Let&rsquo;s start where incoming traffic hits cluster services &ndash; the load balancer.
+We know from K8s concepts that a cluster service needs to be &ldquo;exposed&rdquo; before a client can touch it. Furthermore, the service should be exposed via either &ldquo;NodePort&rdquo; or &ldquo;LoadBalancer&rdquo; to serve external requests.
+While &ldquo;NodePort&rdquo; generally applies to all kinds of infrastructure, &ldquo;LoadBalancer&rdquo; does introduce differences at implementation."/>
+
+</head>
+<body><div class="sidebar animated fadeInDown">
+    <div class="logo-title">
+        <div class="title">
+            <img src="https://kuzhao.github.io/img/021002-O-9999G-015.jpg" alt="profile picture">
+            <h3 title=""><a href="https://kuzhao.github.io/">DuckDuck Go!</a></h3>
+            <div class="description">
+                <p>Record the Discoveries</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://www.linkedin.com/in/andy-zhao-405a8156" rel="me" aria-label="LN">
+                    <i class="fa fa-2x fa-linkedin" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/kuzhao" rel="me" aria-label="Github">
+                    <i class="fa fa-2x fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy;  2020 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top animated fadeInDown">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="https://kuzhao.github.io/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="https://kuzhao.github.io/azurelab"
+                        
+                   title="">AzureLab</a></li>
+        
+            
+            <li><a 
+                   href="https://kuzhao.github.io/k8s"
+                        
+                   title="">k8s</a></li>
+        
+        
+        <li class="theme-switch-item">
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3></h3>
+                
+            </div>
+
+            <p>AKS Networking, illustrated &ndash; Part II</p>
+<p>Ok on this part, we will go over a few details on traffic in/out the cluster. Let&rsquo;s start where incoming traffic hits cluster services &ndash; the load balancer.</p>
+<p>We know from K8s concepts that a cluster service needs to be &ldquo;exposed&rdquo; before a client can touch it. Furthermore, the service should be exposed via either &ldquo;NodePort&rdquo; or &ldquo;LoadBalancer&rdquo; to serve external requests.<br>
+While &ldquo;NodePort&rdquo; generally applies to all kinds of infrastructure, &ldquo;LoadBalancer&rdquo; does introduce differences at implementation. After all, there are many ways to distribute requests over backend nodes. In AKS, it is implemented through a common type of Azure resource, Azure Load Balancer.<br>
+I love my whiteboard a lot! See the conceptual and illustrative drawing below.<br>
+<img src="https://kuzhao.github.io/img/aks_lb_interaction.png" alt="AKS interaction with LB"></p>
+<p>A few highlights:</p>
+<ul>
+<li>Just like a common Azure LB, the LB of the cluster has all settings ranging from backend pools to health probes.</li>
+<li>Once an LB typed service is deployed, the kube-controller-manager talks immediately to ARM service in Azure to setup the corresponding Azure load balancer resource.</li>
+<li>The kube-controller-manager is responsible for analyzing incoming kubectl requests on K8s services before generating the new LB config and refreshing the LB.</li>
+</ul>
+<p>To wrap this up, AKS relies on the logic inside the cluster control plane to properly configure an Azure LB and make the traffic behavior conform to K8s service concepts.</p>
+<hr>
+<p>The above concludes how K8s service loadbalancer model works out in AKS. As you can see, it is all about management operations on Azure resource config updates. But how about traffic on dataplane? To start with the answer to this question, I would like to categorize dataplane traffic into several types like below:<br>
+<img src="https://kuzhao.github.io/img/aks_workload_traffic.png" alt="AKS dataplane traffic"></p>
+<p>While #1,2,3,5,6 follow traffic handling rules of general K8s via SNAT/DNAT, I will talk in depth about #4 which, combined with &ldquo;externalTrafficPolicy&rdquo; option, heavily leverages LB health probing.</p>
+<p><strong>When externalTrafficPolicy=Cluster</strong><br>
+This service traffic policy implies that &ldquo;any nodes are capable of forwarding requests to the backend service pod&rdquo;. If a node does not host the pod, it will then perform a NAT before pushing out traffic to the pod address.<br>
+Of course, LB will deem all nodes eligible to handle traffic and distribute it across them. However, note that LB will also healthcheck backend nodes while the results must be &ldquo;up&rdquo;. And this raises my curiosity: how health probing be set by the cluster control plane?
+To get into the rabbit hole and dig it through, we will first check LB healthprobing config in Azure Portal.<br>
+<img src="https://kuzhao.github.io/img/lbcfg_policy_cluster.png" alt="AKS LB healthcheck policy cluster"></p>
+<p>OK then. What does kubectl describe service say?</p>
+<pre><code>LoadBalancer Ingress:     20.72.161.43
+Port:                     http  80/TCP
+TargetPort:               http/TCP
+NodePort:                 http  30396/TCP
+</code></pre><p>Apparently, the NodePort of this service is written in the healthprobing rule of LB. As long as the node with this NodePort still accepts incoming requests, the healthprobing result will be &ldquo;up&rdquo; and LB will forward through incoming traffic.<br>
+With the above in mind can we get to the following topology for policy=cluster:<br>
+<img src="https://kuzhao.github.io/img/policy_cluster.png" alt="Policy=cluster"></p>
+<p><strong>When externalTrafficPolicy=Local</strong><br>
+In contrast to policy=cluster, this mode forbids non pod hosting nodes from handling incoming traffic. In other words, the LB should NEVER distribute traffic to those unqualifying nodes. This in turn is implemented by leveraging magical health probing.<br>
+Similarly, Check both LB healthprobing config and kubectl describe service:<br>
+<img src="https://kuzhao.github.io/img/lbcfg_policy_local.png" alt="AKS LB healthcheck policy cluster"></p>
+<pre><code>LoadBalancer Ingress:     20.72.161.43
+Port:                     http  80/TCP
+TargetPort:               http/TCP
+NodePort:                 http  32202/TCP
+Endpoints:                172.19.10.143:8080
+Session Affinity:         None
+External Traffic Policy:  Local
+HealthCheck NodePort:     32649
+</code></pre><p>Here we have something interesting when compared to what we have for policy=cluster.</p>
+<ul>
+<li>There is a new &ldquo;HealthCheck Nodeport&rdquo; field added to the description.</li>
+<li>LB healthprobing method changed from TCP:xxxx to HTTP:xxxx/healthz.</li>
+<li>Healthprobing port no longer takes value from NodePort but Healthcheck Nodeport.</li>
+</ul>
+<p>Hence we now have also the topology for policy=local:<br>
+<img src="https://kuzhao.github.io/img/policy_local.png" alt="Policy=local"></p>
+<p>(To be continued)</p>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
+                
+                
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/jquery.min.86b1e8f819ee2d9099a783e50b49dff24282545fc40773861f9126b921532e4c.js"
+        integrity="sha256-hrHo&#43;BnuLZCZp4PlC0nf8kKCVF/EB3OGH5EmuSFTLkw="
+        crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/bundle.min.0f9c74cb78f13d1f15f33daff4037c70354f98acfbb97a6f61708966675c3cae.js"
+        integrity="sha256-D5x0y3jxPR8V8z2v9AN8cDVPmKz7uXpvYXCJZmdcPK4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+        src="https://kuzhao.github.io/js/medium-zoom.min.92f21c856129f84aeb719459b3e6ac621a3032fd7b180a18c04e1d12083f8aba.js"
+        integrity="sha256-kvIchWEp&#43;ErrcZRZs&#43;asYhowMv17GAoYwE4dEgg/iro="
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
