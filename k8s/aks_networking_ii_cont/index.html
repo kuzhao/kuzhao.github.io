@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme=""><head>
-    <title>  | How to isolate pods of different services </title>
+    <title>  | AKS Networking Illustrated, Part II </title>
 
     
     <meta charset="utf-8"><meta name="generator" content="Hugo 0.75.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -19,7 +19,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://kuzhao.github.io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://kuzhao.github.io/favicon-16x16.png">
 
-    <link rel="canonical" href="https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/">
+    <link rel="canonical" href="https://kuzhao.github.io/k8s/aks_networking_ii_cont/">
 
     
     
@@ -30,8 +30,10 @@
             integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
             crossorigin="anonymous"></script>
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="How to isolate pods of different services"/>
-<meta name="twitter:description" content="Objective:  Pods from different service deployments should never run on the same node. Pods of the same deployment should stay on the same node preferably. The above should work after node autoscaling happens.  Pathfinding:  Req #1 repels pods from the node running ones of a different service &ndash;&gt; hard podAntiAffinity Req #2 collects pods under the same service and runs them on the same node at the best &ndash;&gt; soft podAffinity"/>
+<meta name="twitter:title" content="AKS Networking Illustrated, Part II"/>
+<meta name="twitter:description" content="Wrapping up K8s services and LB in AKS, let&rsquo;s now further examine yet another type of traffic &ndash; control plane operations and management. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster.
+DNS Being a cluster internal service, coreDNS &ndash; the DNS software image used in AKS &ndash; has a clear traffic path:
+Pod -&gt; coreDNS ClusterIP -&gt; a coreDNS pod -&gt; Upstream DNS servers"/>
 
 </head>
 <body><div class="sidebar animated fadeInDown">
@@ -106,71 +108,39 @@
         <div class="post-content">
 
             <div class="post-title">
-                <h3>How to isolate pods of different services</h3>
+                <h3>AKS Networking Illustrated, Part II</h3>
                 
             </div>
 
-            <h2 id="objective">Objective:</h2>
-<ol>
-<li>Pods from different service deployments should never run on the same node.</li>
-<li>Pods of the same deployment should stay on the same node preferably.</li>
-<li>The above should work after node autoscaling happens.</li>
-</ol>
-<h2 id="pathfinding">Pathfinding:</h2>
+            <p>Wrapping up K8s services and LB in AKS, let&rsquo;s now further examine yet another type of traffic &ndash; control plane operations and management. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster.</p>
+<h3 id="dns">DNS</h3>
+<p>Being a cluster internal service, coreDNS &ndash; the DNS software image used in AKS &ndash; has a clear traffic path:<br>
+Pod -&gt; coreDNS ClusterIP -&gt; a coreDNS pod -&gt; Upstream DNS servers<br>
+In the context of Azure, the default upstream which is used to resolve internet FQDNs is the DNS server configured for the virtual network of the cluster subnet. Zooming it in, a coreDNS behaves this way to reach out for an internet FQDN:<br>
+coreDNS pod -&gt; serverAddr in resolv.conf of the hosting node -&gt; vnet DNS server<br>
+Eventually, it would be either Azure offered DNS service @168.63.129.16 or a custom server configured by yourself or your Azure networking admin.</p>
+<p>This concludes all DNS related to the below map:<br>
+<img src="https://kuzhao.github.io/img/aks_dns.png" alt="AKS DNS"></p>
+<h3 id="tunnel">Tunnel</h3>
+<p>In a nutshell, the cluster tunnel serves as the passage through which the control plane reaches out to the node it wants. Note that this concept is Azure specific and does not apply to other K8s implementations.<br>
+Given such little info printed on the AKS official doc, it would be worthwhile to talk more about how traffic works out here. Refer to the map below:<br>
+<img src="https://kuzhao.github.io/img/aks_tunnel.png" alt="AKS tunnel">
+Note that apart from handling requests on logs and exec, it is also responsible for passing all instructions the control plane pushes to the node pool. Considerably, you can no longer deploy new pods as nodes no longer get commands from kube-scheduler.</p>
+<h3 id="container-insight">Container Insight</h3>
+<p>We are explicitly talking about &ldquo;Insights&rdquo; and &ldquo;Logs&rdquo; in the cluster blade of Azure Portal. And the ops data comes from agents that are automatically deployed in kube-system by AKS service.<br>
+A direct way of thinking on this subtopic is to treat those logging and telemetry agents as plain apps but in kube-system. There are two parts to the relevant cluster workloads:</p>
 <ul>
-<li>Req #1 repels pods from the node running ones of a different service &ndash;&gt; hard podAntiAffinity</li>
-<li>Req #2 collects pods under the same service and runs them on the same node at the best &ndash;&gt; soft podAffinity<br>
-We should then use requiredDuringSchedulingIgnoredDuringExecution for AntiAffinity and preferredDuringSchedulingIgnoredDuringExecution for Affinity</li>
-<li>AntiAffinity codes should look like below, so that a pod will NOT run on a node where pods with a different service label are running:</li>
+<li>omsagent-rs (ReplicaSet)</li>
+<li>omsagent (DaemonSet)</li>
 </ul>
-<pre><code>requiredDuringSchedulingIgnoredDuringExecution:
-  - labelSelector:
-            matchExpressions:
-  - key: &lt;pod service label&gt;
-              operator: NotIn
-              values:
-              - &lt;labelValue&gt;
-              topologyKey: kubernetes.io/hostname
-</code></pre><ul>
-<li>Affinity codes should look like below:</li>
-</ul>
-<pre><code>preferredDuringSchedulingIgnoredDuringExecution:
-  - weight: 100
-    podAffinityTerm:
-      labelSelector:
-        matchExpressions:
-        - key: component
-          operator: In
-          values:
-          - historical
-      topologyKey: kubernetes.io/hostname
-</code></pre><ul>
-<li>All good as it seems so far? Almost but here is the trick: will a pod still get scheduled after the autoscaler spawns a new node?</li>
-<li>The test proves to be negative. And the autoscaler even refuses to do that because it does not think a new node will help. And that’s TRUE!</li>
-<li>Back to the hard AntiAffinity part, does it match a new node where nothing is running?<br>
-It does, because no pod service label exists in any pods running on that node.<br>
-As a result, a new pod will never get scheduled on any new nodes created by the cluster autoscaler.</li>
-<li>Let’s add one more constraint to AntiAffinity and make it look like this, which will effectively free a new node and make it schedulable:</li>
-</ul>
-<pre><code>requiredDuringSchedulingIgnoredDuringExecution:
-  - labelSelector:
-            matchExpressions:
-              - key: &lt;pod service label&gt;
-              operator: Exists
-  - key: &lt;pod service label&gt;
-              operator: NotIn
-              values:
-              - &lt;labelValue&gt;
-              topologyKey: kubernetes.io/hostname
-</code></pre><ul>
-<li>The test passed!
+<p>Examined from cluster operation perspective, they communicate with external web services just like other web app workloads. In addition, you will find through packet dump that they mostly talk with these Azure service FQDNs:</p>
 <ul>
-<li>When a new service is deployed, the autoscaler will spawn a new AKS node to accomodate it.</li>
-<li>When any existing services ask for more pods which exceed the current node capacity, a new node will also be created where those extra pods will be running.</li>
+<li>[regionName].monitoring.azure.com</li>
+<li>[uuid].ods.opinsights.azure.com</li>
+<li>dc.service.visualstudio.com</li>
+<li>api-server</li>
 </ul>
-</li>
-<li>Finally, sample <a href="https://github.com/kuzhao/playbooks/blob/master/kubelet/sample-apps/pod-isolation-per-svc.yaml">manifest</a></li>
-</ul>
+<p>Therefore, better keep those FQDNs reachable if you have a firewall service standing in the way of cluster egress traffic (usually by applying extra route table entries to the cluster subnet).</p>
 
         </div>
         <div class="post-footer">

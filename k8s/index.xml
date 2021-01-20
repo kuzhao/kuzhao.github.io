@@ -6,7 +6,18 @@
     <description>Recent content in K8s on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Dec 2020 11:15:11 +0800</lastBuildDate><atom:link href="https://kuzhao.github.io/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jan 2021 13:00:11 +0800</lastBuildDate><atom:link href="https://kuzhao.github.io/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AKS Networking Illustrated, Part II</title>
+      <link>https://kuzhao.github.io/k8s/aks_networking_ii_cont/</link>
+      <pubDate>Wed, 20 Jan 2021 13:00:11 +0800</pubDate>
+      
+      <guid>https://kuzhao.github.io/k8s/aks_networking_ii_cont/</guid>
+      <description>Wrapping up K8s services and LB in AKS, let&amp;rsquo;s now further examine yet another type of traffic &amp;ndash; control plane operations and management. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster.
+DNS Being a cluster internal service, coreDNS &amp;ndash; the DNS software image used in AKS &amp;ndash; has a clear traffic path:
+Pod -&amp;gt; coreDNS ClusterIP -&amp;gt; a coreDNS pod -&amp;gt; Upstream DNS servers</description>
+    </item>
+    
     <item>
       <title>AKS Networking Illustrated, Part II</title>
       <link>https://kuzhao.github.io/k8s/aks_networking_ii/</link>
