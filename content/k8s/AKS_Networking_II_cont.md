@@ -3,7 +3,7 @@ title: "AKS Networking Illustrated, Part II(cont.)"
 date: 2021-01-20T13:00:11+08:00
 draft: false
 ---
-Wrapping up K8s services and LB in AKS, let's now further examine yet another type of traffic -- control plane operations and management. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster. 
+Wrapping up K8s services and LB in AKS, let's now further examine yet another type of traffic -- cluster network services to pods. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster. 
 
 ### DNS
 Being a cluster internal service, coreDNS -- the DNS software image used in AKS -- has a clear traffic path:  
