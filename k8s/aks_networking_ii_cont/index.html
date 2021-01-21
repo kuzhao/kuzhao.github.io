@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme=""><head>
-    <title>  | AKS Networking Illustrated, Part II </title>
+    <title>  | AKS Networking Illustrated, Part II(cont.) </title>
 
     
     <meta charset="utf-8"><meta name="generator" content="Hugo 0.75.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -30,8 +30,8 @@
             integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
             crossorigin="anonymous"></script>
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="AKS Networking Illustrated, Part II"/>
-<meta name="twitter:description" content="Wrapping up K8s services and LB in AKS, let&rsquo;s now further examine yet another type of traffic &ndash; control plane operations and management. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster.
+<meta name="twitter:title" content="AKS Networking Illustrated, Part II(cont.)"/>
+<meta name="twitter:description" content="Wrapping up K8s services and LB in AKS, let&rsquo;s now further examine yet another type of traffic &ndash; cluster network services to pods. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster.
 DNS Being a cluster internal service, coreDNS &ndash; the DNS software image used in AKS &ndash; has a clear traffic path:
 Pod -&gt; coreDNS ClusterIP -&gt; a coreDNS pod -&gt; Upstream DNS servers"/>
 
@@ -108,11 +108,11 @@ Pod -&gt; coreDNS ClusterIP -&gt; a coreDNS pod -&gt; Upstream DNS servers"/>
         <div class="post-content">
 
             <div class="post-title">
-                <h3>AKS Networking Illustrated, Part II</h3>
+                <h3>AKS Networking Illustrated, Part II(cont.)</h3>
                 
             </div>
 
-            <p>Wrapping up K8s services and LB in AKS, let&rsquo;s now further examine yet another type of traffic &ndash; control plane operations and management. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster.</p>
+            <p>Wrapping up K8s services and LB in AKS, let&rsquo;s now further examine yet another type of traffic &ndash; cluster network services to pods. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster.</p>
 <h3 id="dns">DNS</h3>
 <p>Being a cluster internal service, coreDNS &ndash; the DNS software image used in AKS &ndash; has a clear traffic path:<br>
 Pod -&gt; coreDNS ClusterIP -&gt; a coreDNS pod -&gt; Upstream DNS servers<br>
