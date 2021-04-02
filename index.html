@@ -107,22 +107,18 @@
     
         <div class="post animated fadeInDown">
             <div class="post-title">
-                <h3><a href="https://kuzhao.github.io/azurelab/how_to_send_receive_eh_db/">How to send and receive events with EventHub in Azure Databricks</a>
+                <h3><a href="https://kuzhao.github.io/k8s/grafana_prom/">How to setup a basic grafana&#43;prometheus for a cluster</a>
                 </h3>
             </div>
             <div class="post-content">
-                <div class="p_part"><p>Sample code available at kuzhao/azurePaas
-Create an EH namespace and instance You should already have an EH resource ready for use. For how to create one, refer to Quickstart via Azure portal
-The next step would be to copy connStr and have it ready by your hand, as we will pass it as py mandatory argument of sample codes.
-Refer to snapshot here on where to get it.
-Explanation on the code I composed both scala files based on Microsoft Azure HDInsight doc send-tweets-to-the-event-hub as well as EventHub java SDK quickstart event-hubs-java-get-started.</p></div>
+                <div class="p_part"><p>Helm prep helm repo add prometheus-community https://prometheus-community.github.io/helm-charts helm repo add grafana https://grafana.github.io/helm-charts Provision prometheus through helm kubectl create ns prometheus helm install prometheus-play prometheus-community/prometheus -n prometheus Install grafana through helm kubectl create ns grafana helm install grafana-play grafana/grafana -n grafana Config in grafana Grafana login  Obtain login credential  kubectl get secret grafana-ui -o yaml -n grafana Extract &ldquo;admin-user&rdquo; and &ldquo;admin-password&rdquo; fields and Base64Decode. Then use them to login.</p></div>
 
                 <div class="p_part"><p></p></div>
             </div>
             <div class="post-footer">
                 <div class="meta">
                     <div class="info"><em class="fa fa-sun-o"></em><span
-                                class="date">Tue, Sep 24, 2019</span>
+                                class="date">Fri, Apr 2, 2021</span>
                         
                     </div>
                 </div>
@@ -131,22 +127,20 @@ Explanation on the code I composed both scala files based on Microsoft Azure HDI
     
         <div class="post animated fadeInDown">
             <div class="post-title">
-                <h3><a href="https://kuzhao.github.io/azurelab/how_to_send_receive_event_azureeh/">How to send and receive events via Azure EventHub</a>
+                <h3><a href="https://kuzhao.github.io/k8s/aks_networking_ii_cont/">AKS Networking Illustrated, Part II(cont.)</a>
                 </h3>
             </div>
             <div class="post-content">
-                <div class="p_part"><p>Sample code available at kuzhao/azurePaas
-Create an EH namespace and instance You should already have an EH resource ready for use. For how to create one, refer to Quickstart via Azure portal
-The next step would be to copy connStr and have it ready by your hand, as we will pass it as py mandatory argument of sample codes.
-Refer to snapshot here on where to get it.
-Explanation on the code I composed both py files based on the example azure-sdk-for-python</p></div>
+                <div class="p_part"><p>Wrapping up K8s services and LB in AKS, let&rsquo;s now further examine yet another type of traffic &ndash; cluster network services to pods. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster.
+DNS Being a cluster internal service, coreDNS &ndash; the DNS software image used in AKS &ndash; has a clear traffic path:
+Pod -&gt; coreDNS ClusterIP -&gt; a coreDNS pod -&gt; Upstream DNS servers</p></div>
 
                 <div class="p_part"><p></p></div>
             </div>
             <div class="post-footer">
                 <div class="meta">
                     <div class="info"><em class="fa fa-sun-o"></em><span
-                                class="date">Sun, Sep 15, 2019</span>
+                                class="date">Wed, Jan 20, 2021</span>
                         
                     </div>
                 </div>
@@ -155,18 +149,20 @@ Explanation on the code I composed both py files based on the example azure-sdk-
     
         <div class="post animated fadeInDown">
             <div class="post-title">
-                <h3><a href="https://kuzhao.github.io/azurelab/how_to_access_upload_to_windowsazurefiles/">How to access/upload to Windows Azure Files in PowerShell</a>
+                <h3><a href="https://kuzhao.github.io/k8s/aks_networking_ii/">AKS Networking Illustrated, Part II</a>
                 </h3>
             </div>
             <div class="post-content">
-                <div class="p_part"><p>Install Az Module for PwShell Install-Module -Name Az -AllowClobber -Scope AllUsers Import Az.Storage PS C:\Users\admin&gt; Import-Module Az.Storage PS C:\Users\admin&gt; Get-Module ModuleType Version Name ExportedCommands ---------- ------- ---- ---------------- Script 1.6.2 Az.Accounts {Add-AzEnvironment, Clear-AzContext, Clear-AzDefault, Conn... Script 1.6.0 Az.Storage {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa... ... Login to Azure account PS C:\Users\admin&gt; Connect-AzAccount Account SubscriptionName TenantId Environment ------- ---------------- -------- ----------- AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud Initialize storage access  Get storage access key Create storage context  $key=PS C:\Users\admin&gt; $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123 PS C:\Users\admin&gt; $key.</p></div>
+                <div class="p_part"><p>Ok on this part, we will go over a few details on traffic in/out the cluster. Let&rsquo;s start where incoming traffic hits cluster services &ndash; the load balancer.
+We know from K8s concepts that a cluster service needs to be &ldquo;exposed&rdquo; before a client can touch it. Furthermore, the service should be exposed via either &ldquo;NodePort&rdquo; or &ldquo;LoadBalancer&rdquo; to serve external requests.
+While &ldquo;NodePort&rdquo; generally applies to all kinds of infrastructure, &ldquo;LoadBalancer&rdquo; does introduce differences at implementation.</p></div>
 
                 <div class="p_part"><p></p></div>
             </div>
             <div class="post-footer">
                 <div class="meta">
                     <div class="info"><em class="fa fa-sun-o"></em><span
-                                class="date">Sun, Sep 8, 2019</span>
+                                class="date">Mon, Dec 21, 2020</span>
                         
                     </div>
                 </div>
@@ -175,18 +171,39 @@ Explanation on the code I composed both py files based on the example azure-sdk-
     
         <div class="post animated fadeInDown">
             <div class="post-title">
-                <h3><a href="https://kuzhao.github.io/azurelab/running_elastic&#43;kibana_on_azure_container_instance/">Running Elastic&#43;Kibana on Azure Container Instance</a>
+                <h3><a href="https://kuzhao.github.io/k8s/aks_networking_i/">AKS Networking Illustrated, Part I</a>
                 </h3>
             </div>
             <div class="post-content">
-                <div class="p_part"><p>Start from azure-quickstart-templates\201-aci-wordpress &#34;containers&#34;: [ { &#34;name&#34;: &#34;elasticsearch&#34;, &#34;properties&#34;: { &#34;image&#34;: &#34;elasticsearch:7.3.1&#34;, &#34;resources&#34;: { &#34;requests&#34;: { &#34;cpu&#34;: &#34;[variables(&#39;cpuCores&#39;)]&#34;, &#34;memoryInGb&#34;: &#34;[variables(&#39;memoryInGb&#39;)]&#34; } } } }, { &#34;name&#34;: &#34;kibana&#34;, &#34;properties&#34;: { &#34;image&#34;: &#34;kibana:7.3.1&#34;, &#34;ports&#34;: [ { &#34;protocol&#34;: &#34;Tcp&#34;, &#34;port&#34;: 5601 } ], &#34;environmentVariables&#34;: [ { &#34;name&#34;: &#34;ELASTICSEARCH_HOSTS&#34;, &#34;value&#34;: &#34;http://127.0.0.1:9200&#34; } ], &#34;resources&#34;: { &#34;requests&#34;: { &#34;cpu&#34;: &#34;[variables(&#39;cpuCores&#39;)]&#34;, &#34;memoryInGb&#34;: &#34;[variables(&#39;memoryInGb&#39;)]&#34; } } } } ] Failed at starting elasticsearch: ERROR: [2] bootstrap checks failed [1]: max virtual memory areas vm.</p></div>
+                <div class="p_part"><p>It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works. I hope these articles will help work in multiple roles ranging from cloud solution architecting to AKS cluster administration.
+I will talk about its networking as the start. And there will be three parts on this subtopic, each corresponding to one article in this series.</p></div>
 
                 <div class="p_part"><p></p></div>
             </div>
             <div class="post-footer">
                 <div class="meta">
                     <div class="info"><em class="fa fa-sun-o"></em><span
-                                class="date">Sun, Sep 8, 2019</span>
+                                class="date">Mon, Nov 30, 2020</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="post animated fadeInDown">
+            <div class="post-title">
+                <h3><a href="https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/">How to isolate pods of different services</a>
+                </h3>
+            </div>
+            <div class="post-content">
+                <div class="p_part"><p>Objective:  Pods from different service deployments should never run on the same node. Pods of the same deployment should stay on the same node preferably. The above should work after node autoscaling happens.  Pathfinding:  Req #1 repels pods from the node running ones of a different service &ndash;&gt; hard podAntiAffinity Req #2 collects pods under the same service and runs them on the same node at the best &ndash;&gt; soft podAffinity</p></div>
+
+                <div class="p_part"><p></p></div>
+            </div>
+            <div class="post-footer">
+                <div class="meta">
+                    <div class="info"><em class="fa fa-sun-o"></em><span
+                                class="date">Sat, Oct 31, 2020</span>
                         
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme=""><head>
-    <title>  | K8s </title>
+    <title>  | How to setup a basic grafana&#43;prometheus for a cluster </title>
 
     
     <meta charset="utf-8"><meta name="generator" content="Hugo 0.75.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -19,10 +19,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://kuzhao.github.io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://kuzhao.github.io/favicon-16x16.png">
 
-    <link rel="canonical" href="https://kuzhao.github.io/k8s/">
+    <link rel="canonical" href="https://kuzhao.github.io/k8s/grafana_prom/">
 
     
-    <link rel="alternate" type="application/rss+xml" href="https://kuzhao.github.io/k8s/index.xml" title="" />
     
     
     
@@ -31,8 +30,8 @@
             integrity="sha256-54LbE27BjRBaRVJwLqxJ9GINaGfaP7&#43;Ai9U&#43;gGyWvm4="
             crossorigin="anonymous"></script>
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="K8s"/>
-<meta name="twitter:description" content="Record the Discoveries"/>
+<meta name="twitter:title" content="How to setup a basic grafana&#43;prometheus for a cluster"/>
+<meta name="twitter:description" content="Helm prep helm repo add prometheus-community https://prometheus-community.github.io/helm-charts helm repo add grafana https://grafana.github.io/helm-charts Provision prometheus through helm kubectl create ns prometheus helm install prometheus-play prometheus-community/prometheus -n prometheus Install grafana through helm kubectl create ns grafana helm install grafana-play grafana/grafana -n grafana Config in grafana Grafana login  Obtain login credential  kubectl get secret grafana-ui -o yaml -n grafana Extract &ldquo;admin-user&rdquo; and &ldquo;admin-password&rdquo; fields and Base64Decode. Then use them to login."/>
 
 </head>
 <body><div class="sidebar animated fadeInDown">
@@ -103,57 +102,54 @@
 
     <div class="autopagerize_page_element">
         <div class="content">
-    <div class="archive animated fadeInDown">
-        <ul class="list-with-title">
-            
-                <div class="listing-title">2021</div>
+    <div class="post animated fadeInDown">
+        <div class="post-content">
+
+            <div class="post-title">
+                <h3>How to setup a basic grafana&#43;prometheus for a cluster</h3>
                 
-                    <ul class="listing">
-                        <div class="listing-item">
-                            <div class="listing-post"><a href="https://kuzhao.github.io/k8s/grafana_prom/" title="How to setup a basic grafana&#43;prometheus for a cluster">How to setup a basic grafana&#43;prometheus for a cluster</a>
-                                <div class="post-time"><span class="date">Apr 2</span></div>
-                            </div>
-                        </div>
-                    </ul>
+            </div>
+
+            <h2 id="helm-prep">Helm prep</h2>
+<pre><code>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add grafana https://grafana.github.io/helm-charts
+</code></pre><h2 id="provision-prometheus-through-helm">Provision prometheus through helm</h2>
+<pre><code>kubectl create ns prometheus
+helm install prometheus-play prometheus-community/prometheus -n prometheus
+</code></pre><h2 id="install-grafana-through-helm">Install grafana through helm</h2>
+<pre><code>kubectl create ns grafana
+helm install grafana-play grafana/grafana -n grafana
+</code></pre><h2 id="config-in-grafana">Config in grafana</h2>
+<h3 id="grafana-login">Grafana login</h3>
+<ul>
+<li>Obtain login credential</li>
+</ul>
+<pre><code>kubectl get secret grafana-ui -o yaml -n grafana
+</code></pre><p>Extract &ldquo;admin-user&rdquo; and &ldquo;admin-password&rdquo; fields and Base64Decode. Then use them to login.</p>
+<h3 id="dashboard">Dashboard</h3>
+<ul>
+<li>Add prometheus data source<br>
+In the Grafana UI<br>
+Configuration (The gear icon) -&gt; Data Sources -&gt; Add data source -&gt; Prometheus -&gt; Fill &ldquo;prometheus-play.prometheus&rdquo; in &ldquo;HTTP - URL&rdquo;, keep everything else by default -&gt; Save &amp; Test</li>
+<li>Setup cluster dashboard<br>
+In the Grafana UI<br>
+Create (the icon &lsquo;+&rsquo; on the left sidebar) -&gt;  Import -&gt; Import via grafana.com -&gt; search at <a href="https://grafana.com/grafana/dashboards">https://grafana.com/grafana/dashboards</a> and fill in the desired dashId i.e. 13770 -&gt; Load -&gt; Import at bottom</li>
+<li>View your dash<br>
+In the Grafana UI<br>
+Dashboards -&gt; Home -&gt; click the dash name you just imported -&gt; enjoy</li>
+</ul>
+
+        </div>
+        <div class="post-footer">
+            <div class="info">
                 
-                    <ul class="listing">
-                        <div class="listing-item">
-                            <div class="listing-post"><a href="https://kuzhao.github.io/k8s/aks_networking_ii_cont/" title="AKS Networking Illustrated, Part II(cont.)">AKS Networking Illustrated, Part II(cont.)</a>
-                                <div class="post-time"><span class="date">Jan 20</span></div>
-                            </div>
-                        </div>
-                    </ul>
                 
-            
-                <div class="listing-title">2020</div>
-                
-                    <ul class="listing">
-                        <div class="listing-item">
-                            <div class="listing-post"><a href="https://kuzhao.github.io/k8s/aks_networking_ii/" title="AKS Networking Illustrated, Part II">AKS Networking Illustrated, Part II</a>
-                                <div class="post-time"><span class="date">Dec 21</span></div>
-                            </div>
-                        </div>
-                    </ul>
-                
-                    <ul class="listing">
-                        <div class="listing-item">
-                            <div class="listing-post"><a href="https://kuzhao.github.io/k8s/aks_networking_i/" title="AKS Networking Illustrated, Part I">AKS Networking Illustrated, Part I</a>
-                                <div class="post-time"><span class="date">Nov 30</span></div>
-                            </div>
-                        </div>
-                    </ul>
-                
-                    <ul class="listing">
-                        <div class="listing-item">
-                            <div class="listing-post"><a href="https://kuzhao.github.io/k8s/how_to_isolate_pod_from_diff_svc/" title="How to isolate pods of different services">How to isolate pods of different services</a>
-                                <div class="post-time"><span class="date">Oct 31</span></div>
-                            </div>
-                        </div>
-                    </ul>
-                
-            
-        </ul>
+            </div>
+        </div>
+
+        
     </div>
+
 
         </div>
     </div>
