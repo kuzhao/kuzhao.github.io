@@ -110,23 +110,23 @@
                 
             </div>
 
-            <h2 id="helm-prep">Helm prep</h2>
+            <h3 id="helm-prep">Helm prep</h3>
 <pre><code>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo add grafana https://grafana.github.io/helm-charts
-</code></pre><h2 id="provision-prometheus-through-helm">Provision prometheus through helm</h2>
+</code></pre><h3 id="provision-prometheus-through-helm">Provision prometheus through helm</h3>
 <pre><code>kubectl create ns prometheus
 helm install prometheus-play prometheus-community/prometheus -n prometheus
-</code></pre><h2 id="install-grafana-through-helm">Install grafana through helm</h2>
+</code></pre><h3 id="install-grafana-through-helm">Install grafana through helm</h3>
 <pre><code>kubectl create ns grafana
 helm install grafana-play grafana/grafana -n grafana
-</code></pre><h2 id="config-in-grafana">Config in grafana</h2>
-<h3 id="grafana-login">Grafana login</h3>
+</code></pre><h3 id="config-in-grafana">Config in grafana</h3>
+<h4 id="grafana-login">Grafana login</h4>
 <ul>
 <li>Obtain login credential</li>
 </ul>
 <pre><code>kubectl get secret grafana-ui -o yaml -n grafana
 </code></pre><p>Extract &ldquo;admin-user&rdquo; and &ldquo;admin-password&rdquo; fields and Base64Decode. Then use them to login.</p>
-<h3 id="dashboard">Dashboard</h3>
+<h4 id="dashboard">Dashboard</h4>
 <ul>
 <li>Add prometheus data source<br>
 In the Grafana UI<br>
