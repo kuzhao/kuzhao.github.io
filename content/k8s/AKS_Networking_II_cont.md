@@ -18,8 +18,8 @@ This concludes all DNS related to the below map:
 ### Tunnel
 In a nutshell, the cluster tunnel serves as the passage through which the control plane reaches out to the node it wants. Note that this concept is Azure specific and does not apply to other K8s implementations.  
 Given such little info printed on the AKS official doc, it would be worthwhile to talk more about how traffic works out here. Refer to the map below:  
-![AKS tunnel](/img/aks_tunnel.png)
-Note that apart from handling requests on logs and exec, it is also responsible for passing all instructions the control plane pushes to the node pool. Considerably, you can no longer deploy new pods as nodes no longer get commands from kube-scheduler.
+![AKS tunnel](/img/aks_tunnel.png)  
+Note that apart from handling requests on logs and exec, it is also responsible for passing all instructions the control plane pushes to the node pool. Considerably, once it's down you can no longer deploy new pods as the control plane can no longer reach kubelet on nodes.
 
 ### Container Insight
 We are explicitly talking about "Insights" and "Logs" in the cluster blade of Azure Portal. And the ops data comes from agents that are automatically deployed in kube-system by AKS service.  
