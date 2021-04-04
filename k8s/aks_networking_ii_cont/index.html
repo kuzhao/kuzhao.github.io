@@ -124,8 +124,8 @@ Eventually, it would be either Azure offered DNS service @168.63.129.16 or a cus
 <h3 id="tunnel">Tunnel</h3>
 <p>In a nutshell, the cluster tunnel serves as the passage through which the control plane reaches out to the node it wants. Note that this concept is Azure specific and does not apply to other K8s implementations.<br>
 Given such little info printed on the AKS official doc, it would be worthwhile to talk more about how traffic works out here. Refer to the map below:<br>
-<img src="https://kuzhao.github.io/img/aks_tunnel.png" alt="AKS tunnel">
-Note that apart from handling requests on logs and exec, it is also responsible for passing all instructions the control plane pushes to the node pool. Considerably, you can no longer deploy new pods as nodes no longer get commands from kube-scheduler.</p>
+<img src="https://kuzhao.github.io/img/aks_tunnel.png" alt="AKS tunnel"><br>
+Note that apart from handling requests on logs and exec, it is also responsible for passing all instructions the control plane pushes to the node pool. Considerably, once it&rsquo;s down you can no longer deploy new pods as the control plane can no longer reach kubelet on nodes.</p>
 <h3 id="container-insight">Container Insight</h3>
 <p>We are explicitly talking about &ldquo;Insights&rdquo; and &ldquo;Logs&rdquo; in the cluster blade of Azure Portal. And the ops data comes from agents that are automatically deployed in kube-system by AKS service.<br>
 A direct way of thinking on this subtopic is to treat those logging and telemetry agents as plain apps but in kube-system. There are two parts to the relevant cluster workloads:</p>
