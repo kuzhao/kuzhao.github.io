@@ -1,6 +1,6 @@
 ---
 title: "Set timezone for a K8s Windows container"
-date: 2021-07-20T11:37:11+08:00
+date: 2021-07-20T11:25:11+08:00
 draft: false
 ---
 You might once be challenged by an app requirement common under Windows environment: align the timezone to its location. For a simple example, I would like my app data and logs to carry UTC+8 in East Asia, and UTC-6 in US midwest.  
