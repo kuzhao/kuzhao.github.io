@@ -3,10 +3,8 @@ title: "AKS Networking Illustrated, Part I"
 date: 2020-11-30T11:37:11+08:00
 draft: false
 ---
-It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works. I hope these articles will help work in multiple roles ranging from cloud solution architecting to AKS cluster administration. 
-
-I will talk about its **networking** as the start. And there will be three parts on this subtopic, each corresponding to one article in this series.
-This will be intended for: a) people managing and monitoring their clusters; b) networking experts interested in enriching their knowledge arsenal with microservice networking; c) Azure project executors who are about to implement great Azure solutions.
+It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works.  
+I will talk about its networking as the start, in which there will be three parts and articles. And I hope this helps: a) people managing and monitoring their clusters; b) networking experts interested in enriching their knowledge arsenal with microservice networking; c) Azure project executors who are about to implement great Azure solutions.
 
 #### Overview of this networking series
 Let's first set the perimeter to properly scope what to discuss.
@@ -14,11 +12,9 @@ Let's first set the perimeter to properly scope what to discuss.
 - We will not examine K8s master logic and control plane components such as api server and controller manager.
 - We will not discuss anything related to applications and workloads, even if some of them, like Istio and Nginx ingress, offer networking related services.
 
-In this series, we will first check and name concepts and types of resources involved in any AKS networking operations or functionalities in Part I.  
-In Part II as the next step, we will focus on the K8s concept -- a service object, which works essentially as the entry for the largest percentage of cluster traffic. We will then further categorize cluster traffic into various kinds and break them up for analysis.  
-Lastly in Part III, we will take the cloth and dress up as detectives before diving into some of the most bizarre yet resounding symptoms and pitfalls regarding AKS networking.
-
 ### Part I begins here
+
+In this part, we will check and name concepts and types of resources involved in any AKS networking operations or functionalities.  
 Allow me to use my ragged sketch below to name all networking related elements of an AKS cluster.
 ![AKS Networking Resources](/img/aks-net-azure-resource.png)
 
