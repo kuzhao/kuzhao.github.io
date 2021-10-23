@@ -1,4 +1,3 @@
-An Overview of Azure Identity in AKS
 ---
 title: "An Overview of Azure Identity in AKS"
 date: 2021-10-23T14:25:11+08:00
