@@ -30,8 +30,8 @@ For this purpose we have:
 A brief table likewise:
 |Feature Name | Function | How to Enable| Value|
 |---------- |:---------|:----------|:---------|
-|Pod identity| Make pods capable of using Azure identities | Args in AzCLI for existing clusters | Your apps can get bearer tokens issued by AAD |
-|Secret store csi driver | Mount AKV secrets to pods as inline volumes | Args in AzCLI for both new and existing clusters | secrets in AKV instead of K8s secret objects, created from plaintext |
+|Pod identity| Make pods capable of using Azure identities | Args in AzCLI for existing clusters,or Helm(legacy) | Your apps can get bearer tokens issued by AAD |
+|Secret store csi driver | Mount AKV secrets to pods as inline volumes | Args in AzCLI for both new and existing clusters,or Helm(legacy) | secrets in AKV instead of K8s secret objects, created from plaintext |
 
 ### Difference
 With the above tables at hand, I believe now you can clearly distinguish one group from the other?  
