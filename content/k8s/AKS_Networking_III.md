@@ -16,7 +16,7 @@ One day my case bell rang with a customer complaining about part of nodes NotRea
 Error updating node status, will retry: error getting node "aks-agentpool01-27254751-vmss000030": unexpected error when reading response body. Please try again. Original error: net/http: request canceled (Client.Timeout exceeded while reading body) 
 ```
 Since all AKS nodes reside in the same subnet sharing one NSG and routeTable, what could go wrong with those particular nodes?  
-![NSG](NSG_deny_all.png)  
+![NSG](/img/NSG_deny_all.png)  
 Looking closely at NSG, I noticed a "DenyAll" as the default outbound rule! But that's not the actual problem coz there are plenty of "Allow" rules above it.  
 But are all nodes allowed? Negative. Given that the subnet CIDR as <172.16.5.0/24>, the "Allow" rules only cover part of the whole subnet.  
 And those nodes fell outside.
