@@ -1,10 +1,23 @@
 ---
-title: "How to setup a vanilla Calico cluster"
+title: "How to setup a vanilla Calico cluster(RH based)"
 date: 2021-08-12T14:47:11+08:00
 draft: false
 ---
 ## Setup the OS 
-**Add China repo**  
+**Add K8s repo**  
+```bash
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+yum install -y kubectl
+```
+**(if within China GFW)**  
 Reference: https://xuxinkun.github.io/2019/06/11/cn-registry/
 ```bash
 # CentOS/RHEL/Fedora
@@ -41,7 +54,7 @@ Use kubeadm to init K8s master.
 ```bash
 kubeadm init --config init.yml
 ```
-You should then have both the kubeconfig file and the "kubeadm join" command from the output. **Do NOT lose them.**
+You should then have both the kubeconfig file and the "kubeadm join" command from the output. **Do NOT lose them.** You will need it for later kubectl exec.  
 
 **Setup agent nodes**  
 On each agent node:  
@@ -51,7 +64,7 @@ systemctl enable kubelet --now
 kubeadm join xxxxxxxxx
 ```
 **Isolate the master node**  
-Use the saved kubeconfig to activate your kubectl anywhere the master node ip is reachable.  
+This is to purge existing workloads, and further prevent pod scheduling on master.
 ```bash
 kubectl cordon <master-node-name>
 kubectl get pod -A -o wide
