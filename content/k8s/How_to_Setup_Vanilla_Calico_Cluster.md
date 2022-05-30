@@ -31,7 +31,7 @@ repo_gpgcheck=1
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF
 ```
-**Setup docker daemon**
+**Setup docker daemon**  
 ```bash
 # Disable SELinux -- set to permissive mode
 setenforce 0
@@ -44,18 +44,16 @@ systemctl enable docker --now
 **Setup K8s master**  
 Prepare kubeadm init.yml. Ref: https://github.com/maguowei/gotok8s/blob/master/init.yml  
 After that, **Set kubernetesVersion within the yml.**  
-
 Install kubelet and kubeadm of the same kubernetesVersion with the yml.
 ```bash
 yum install -y kubeadm-1.xx.x kubelet-1.xx.x
 systemctl enable kubelet --now
 ```
-Use kubeadm to init K8s master.
+Use kubeadm to init K8s master.  
 ```bash
 kubeadm init --config init.yml
 ```
 You should then have both the kubeconfig file and the "kubeadm join" command from the output. **Do NOT lose them.** You will need it for later kubectl exec.  
-
 **Setup agent nodes**  
 On each agent node:  
 ```bash
