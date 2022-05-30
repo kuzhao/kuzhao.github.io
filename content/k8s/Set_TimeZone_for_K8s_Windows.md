@@ -25,18 +25,17 @@ Typically, your OS image version should be higher than the docker image version.
 If your image is satisfying, then it's just a matter of properly composing the manifest. Below is my successful example, noting that "samples:aspnetapp" is built upon a compatible windowsCore base image:
 ```yaml
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: sample
   labels:
-    app: sample
+    app: settz
 spec:
-  replicas: 1
   template:
     metadata:
       name: sample
       labels:
-        app: sample
+        app: settz
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": windows
@@ -44,11 +43,9 @@ spec:
       - name: sample
         image: mcr.microsoft.com/dotnet/framework/samples:aspnetapp
         command: ['powershell','-Command','Set-TimeZone -Name "Pacific Standard Time";Get-TimeZone;ping -t localhost']
-        ports:
-          - containerPort: 80
   selector:
     matchLabels:
-      app: sample
+      app: settz
 ```
 In your own implementation, replace my dummy "ping -t localhost" after timezone setting with your own image entrypoint.  
 Container std output of the above deployment:
@@ -65,8 +62,5 @@ BaseUtcOffset              : -08:00:00
 SupportsDaylightSavingTime : True
 
 ```
-### Diagram and Summary
-You can take the below goal-solution diagram as the key takeaway of this blog.  
-![Goal-solution Diagram](/img/win-container-settz-diagram.png)
-
+### Last Words
 Always remember to confirm the node OS version and use compatible (lower) base docker images. In your production scenario, always adopt up-to-date base images as the start to build app images.  
