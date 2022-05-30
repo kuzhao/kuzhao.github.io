@@ -11,7 +11,7 @@ This includes tasks like namespace access segregation, read/write permission on 
 This one has to do in particular with the apps running as pods. When your app makes REST api calls to external services, it needs to place in the call a bearer token recognized by the target service for authorization.  
 For different purposes, we choose corresponding features from Azure identity integration.  
 
-### Cluster administration
+**Cluster administration**  
 For this purpose we have:  
 - AAD integration
 - Azure RBAC integration
@@ -23,7 +23,7 @@ A brief table as below:
 |Azure RBAC | Utilize Azure user RBAC in place of K8s RBAC | Args in AzCLI for both new and existing clusters | Save effort for configure K8s RBAC |
 |ACR integration | Allow the cluster to pull images from specified ACRs | Args in AzCLI for both new and existing clusters | No need to set registry credentials in K8s deploy |
 
-### Auth token for workloads
+**Auth token for workloads**  
 For this purpose we have:  
 - Pod identity
 - Secret store csi driver
@@ -33,7 +33,7 @@ A brief table likewise:
 |Pod identity| Make pods capable of using Azure identities | Args in AzCLI for existing clusters,or Helm(legacy) | Your apps can get bearer tokens issued by AAD |
 |Secret store csi driver | Mount AKV secrets to pods as inline volumes | Args in AzCLI for both new and existing clusters,or Helm(legacy) | secrets in AKV instead of K8s secret objects, created from plaintext |
 
-### Difference
+**Difference**  
 With the above tables at hand, I believe now you can clearly distinguish one group from the other?  
 ++-> **AAD/RBAC/ACR integ are for cluster admins.**  
 ++-> **Others are for developers/users with their workloads.**  

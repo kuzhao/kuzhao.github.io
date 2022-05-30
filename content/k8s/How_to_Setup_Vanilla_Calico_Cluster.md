@@ -3,7 +3,7 @@ title: "How to setup a vanilla Calico cluster(RH based)"
 date: 2021-08-12T14:47:11+08:00
 draft: false
 ---
-## Setup the OS 
+### Setup the OS 
 **Add K8s repo**  
 ```bash
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -40,7 +40,7 @@ yum install -y docker
 sed -i 's/--selinux-enabled//' /etc/sysconfig/docker
 systemctl enable docker --now
 ```
-## Provision the cluster
+### Provision the cluster
 **Setup K8s master**  
 Prepare kubeadm init.yml. Ref: https://github.com/maguowei/gotok8s/blob/master/init.yml  
 After that, **Set kubernetesVersion within the yml.**  
@@ -71,7 +71,7 @@ kubectl get pod -A -o wide
 # Optional below
 kubectl delete pod <corednsPod if On Master> 
 ```
-## Setup Calico
+### Setup Calico
 Follow https://docs.projectcalico.org/getting-started/kubernetes/quickstart#install-calico but **Halt before step#2**.  
 At #2, replace "custom-resources.yaml" from calico.org with one similar with below:  
 ```yaml
@@ -91,7 +91,7 @@ spec:
       nodeSelector: all()
 ```
 Then proceed with kubectl create -f in #2.
-## Deploy the traffic testsuit
+### Deploy the traffic testsuit
 Topology:  
 CurlClient <-> WebServer  
 node #1        node #2
