@@ -3,7 +3,7 @@ title: "Common AKS Troubles - CRUD"
 date: 2022-05-30T17:15:11+08:00
 draft: false
 ---
-In these two consequtive blogs, we are going to fly over a plethora of AKS problems, highlighting where to check and poke for quick resolution.
+In this "common AKS troubles" sequel, we are going to fly over a plethora of AKS problems, highlighting where to check and poke for quick resolution.
 #### AKS Resource CRUD
 "CRUD" typically means all conceivable operations against an object. In the world of database, you might once hear terminologies like "atomic CRUD" on create/read/update/delete operation against data row(s).  
 In the world of Azure cloud, an AKS cluster, similar with other resource types, takes CRUD requests from cloud admin. The request, whose body takes a json format, flows and routes through Azure Resource Manager (ARM), before ends up being processed at AKS resource provider (RP).  
