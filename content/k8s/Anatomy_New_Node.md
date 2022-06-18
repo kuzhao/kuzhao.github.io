@@ -11,7 +11,7 @@ Behind the scenes, if you curiously examine the cluster's infrastructure resourc
 ![VMSS Activity](/img/vmss_activity_create.png)  
 and more that may not be quite human-readable if you click open that entry and go to "JSON" tab:  
 ![VMSS Create Json](/img/vmss_create_json.png)  
-Replacing '\"' with plain double quote, we have a complete resource json for the VMSS being created:
+Replacing '\\"' with plain double quote, we have a complete resource json for the VMSS being created:
 ```
 {
   "name": "aks-np2-39451173-vmss",
