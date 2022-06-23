@@ -1,8 +1,14 @@
 ---
-title: "AKS Networking illustrated, Part III"
+title: "AKS Networking Illustrated, Part III"
 date: 2021-08-27T11:15:11+08:00
 draft: false
 ---
+*The Series on AKS Networking --*  
+[AKS Networking Illustrated, Part I](https://kuzhao.github.io/k8s/aks_networking_i/)  
+[AKS Networking Illustrated, Part II](https://kuzhao.github.io/k8s/aks_networking_ii/)  
+[AKS Networking Illustrated, Part II(cont.)](https://kuzhao.github.io/k8s/aks_networking_ii_cont/)  
+[AKS Networking Illustrated, Part III](https://kuzhao.github.io/k8s/aks_networking_iii/)  
+
 In this blog we will review networking troubles from the real world -- on decent, serious production clusters in my customer support career. Be prepared!
 
 #### What's wrong with the api-server?

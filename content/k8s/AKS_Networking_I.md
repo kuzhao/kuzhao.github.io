@@ -3,6 +3,12 @@ title: "AKS Networking Illustrated, Part I"
 date: 2020-11-30T11:37:11+08:00
 draft: false
 ---
+*The Series on AKS Networking --*  
+[AKS Networking Illustrated, Part I](https://kuzhao.github.io/k8s/aks_networking_i/)  
+[AKS Networking Illustrated, Part II](https://kuzhao.github.io/k8s/aks_networking_ii/)  
+[AKS Networking Illustrated, Part II(cont.)](https://kuzhao.github.io/k8s/aks_networking_ii_cont/)  
+[AKS Networking Illustrated, Part III](https://kuzhao.github.io/k8s/aks_networking_iii/)  
+
 It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works.  
 I will talk about its networking as the start, in which there will be three parts and articles. And I hope this helps: a) people managing and monitoring their clusters; b) networking experts interested in enriching their knowledge arsenal with microservice networking; c) Azure project executors who are about to implement great Azure solutions.
 

@@ -3,6 +3,12 @@ title: "AKS Networking Illustrated, Part II(cont.)"
 date: 2021-01-20T13:00:11+08:00
 draft: false
 ---
+*The Series on AKS Networking --*  
+[AKS Networking Illustrated, Part I](https://kuzhao.github.io/k8s/aks_networking_i/)  
+[AKS Networking Illustrated, Part II](https://kuzhao.github.io/k8s/aks_networking_ii/)  
+[AKS Networking Illustrated, Part II(cont.)](https://kuzhao.github.io/k8s/aks_networking_ii_cont/)  
+[AKS Networking Illustrated, Part III](https://kuzhao.github.io/k8s/aks_networking_iii/)  
+
 Wrapping up K8s services and LB in AKS, let's now further examine yet another type of traffic -- cluster network services to pods. Though not in large volume, it is crucial for wellbeing and performance of an AKS cluster. 
 
 #### DNS

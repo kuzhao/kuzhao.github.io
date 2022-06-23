@@ -3,6 +3,12 @@ title: "AKS Networking Illustrated, Part II"
 date: 2020-12-21T11:15:11+08:00
 draft: false
 ---
+*The Series on AKS Networking --*  
+[AKS Networking Illustrated, Part I](https://kuzhao.github.io/k8s/aks_networking_i/)  
+[AKS Networking Illustrated, Part II](https://kuzhao.github.io/k8s/aks_networking_ii/)  
+[AKS Networking Illustrated, Part II(cont.)](https://kuzhao.github.io/k8s/aks_networking_ii_cont/)  
+[AKS Networking Illustrated, Part III](https://kuzhao.github.io/k8s/aks_networking_iii/)  
+
 Ok on this part, we will go over a few details on traffic in/out the cluster. Let's start where incoming traffic hits cluster services -- the load balancer.
 
 We know from K8s concepts that a cluster service needs to be "exposed" before a client can touch it. Furthermore, the service should be exposed via either "NodePort" or "LoadBalancer" to serve external requests.  
