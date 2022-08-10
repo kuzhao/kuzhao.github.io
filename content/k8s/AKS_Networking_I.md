@@ -10,9 +10,8 @@ draft: false
 [AKS Networking Illustrated, Part III](https://kuzhao.github.io/k8s/aks_networking_iii/)  
 
 It has been a year since I started working on customer escalation and advisory for AKS service at Microsoft. After so many customer case studies, I do feel the need to write up a series on how this Azure product works.  
-I will talk about its networking as the start, in which there will be three parts and articles. And I hope this helps: a) people managing and monitoring their clusters; b) networking experts interested in enriching their knowledge arsenal with microservice networking; c) Azure project executors who are about to implement great Azure solutions.
+I will talk about its networking as the start, in which there will be three parts and articles. I hope this helps: a) people managing and monitoring their clusters; b) networking experts interested in enriching their knowledge arsenal with microservice networking; c) Azure project executors who are about to implement great Azure solutions.
 
-#### Overview of this networking series
 Let's first set the perimeter to properly scope what to discuss.
 - It is only about an AKS cluster, rather than an on-premise one or a cluster offered by GCE or AWS
 - We will not examine K8s master logic and control plane components such as api server and controller manager.
