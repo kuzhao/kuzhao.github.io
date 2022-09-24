@@ -16,6 +16,7 @@ For this purpose we have:
 - AAD integration
 - Azure RBAC integration
 - Azure container registry integration
+
 A brief table as below:  
 |Feature Name | Function | How to Enable| Value|
 |---------- |:---------|:----------|:---------|
@@ -27,6 +28,7 @@ A brief table as below:
 For this purpose we have:  
 - Pod identity
 - Secret store csi driver
+
 A brief table likewise:
 |Feature Name | Function | How to Enable| Value|
 |---------- |:---------|:----------|:---------|

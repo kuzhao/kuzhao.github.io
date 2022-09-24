@@ -26,7 +26,7 @@ theme="anatole"
 [[params.socialIcons]]
     icon = "fa-linkedin"
     title = "LN"
-    url = "https://www.linkedin.com/in/andy-zhao-405a8156"
+    url = "https://www.linkedin.com/in/kuzhao"
 [[params.socialIcons]]
     icon = "fa-github"
     title = "Github"
