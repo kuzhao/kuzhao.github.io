@@ -10,10 +10,21 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      wget "https://github.com/gohugoio/hugo/releases/download/v$(HUGO_RELEASE)/hugo_extended_$(HUGO_RELEASE)_Linux-64bit.deb"
+      sudo dpkg -i hugo*.deb
+      hugo version
+      hugo
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: GitHubPagesPublish@1
+  inputs:
+    docPath: 'public'
+    githubusername: 'kuzhao'
+    githubaccesstoken: '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'
+    repositoryname: 'kuzhao.github.io'
+    branchname: 'master'
+    commitmessage: 'Automated Release $(Build.SourceVersion)'
