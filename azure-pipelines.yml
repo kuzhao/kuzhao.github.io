@@ -6,8 +6,7 @@
 trigger:
 - master
 
-pool:
-  Agent.OS: Linux
+pool: Linux
 
 steps:
 - task: Bash@3
