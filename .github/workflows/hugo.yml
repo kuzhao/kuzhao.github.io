@@ -72,7 +72,7 @@ jobs:
           badges: |
             [
               {
-                "badge": "https://img.shields.io/github/workflow/status/${{ env.repo_owner }}/${{ env.repo_name }}/Release/master?logo=github&style=flat-square",
+                "badge": "https://img.shields.io/github/actions/workflow/status/${{ env.repo_owner }}/${{ env.repo_name }}/hugo.yml",
                 "alt": "build",
                 "link": "${{ env.repo_url }}/actions/workflows/hugo.yml"
               }
