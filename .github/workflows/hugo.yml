@@ -61,6 +61,22 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./public
+      - name: Add build pass badge
+        uses: wow-actions/add-badges@v1
+        env:
+          repo_url: ${{ github.event.repository.html_url }}
+          repo_name: ${{ github.event.repository.name }}
+          repo_owner: ${{ github.event.repository.owner.login }}
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          badges: |
+            [
+              {
+                "badge": "https://img.shields.io/github/workflow/status/${{ env.repo_owner }}/${{ env.repo_name }}/Release/master?logo=github&style=flat-square",
+                "alt": "build",
+                "link": "${{ env.repo_url }}/actions/workflows/hugo.yml"
+              }
+            ]
   # Deployment job
   deploy:
     environment:
