@@ -3,7 +3,7 @@ title: "Running Elastic+Kibana on Azure Container Instance"
 date: 2019-09-08T16:47:11+08:00
 draft: false
 ---
-### Start from [azure-quickstart-templates\201-aci-wordpress](https://github.com/Azure/azure-quickstart-templates.git)
+Start from [azure-quickstart-templates\201-aci-wordpress](https://github.com/Azure/azure-quickstart-templates.git)
 ```json
 "containers": [
   {
@@ -44,7 +44,7 @@ draft: false
   }
 ]
 ```
-### Failed at starting elasticsearch:
+**Failed at starting elasticsearch:**
 ```
 ERROR: [2] bootstrap checks failed  
 [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
@@ -61,14 +61,14 @@ ERROR: [2] bootstrap checks failed
   }
 ]
 ```
-Deployment still Failing :
+**Deployment still Failing:**
 ```
 Deployment failed. Correlation ID: 1608e8d7-3af1-4cac-bfe1-22276ccf114a. {
     "code": "InvalidContainerEnvironmentVariable",
     "message": "The environment variable name in container 'elasticsearch' of container group 'wordpress-containerinstance' is invalid. A valid environment variable name must start with alphabetic character or '_', followed by a string of alphanumeric characters or '_' (e.g. 'my_name',  or 'MY_NAME',  or 'MyName')."
 }
 ```
-### Fix envvar format\(replacing '.' with '\_'\), not working
+**Fix envvar format\(replacing '.' with '\_'\), not working**  
 * Elasticsearch does not honor this env as part of settings.  
 * Also, cannot modify existing containerGroup:
 

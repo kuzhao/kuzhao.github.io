@@ -1,5 +1,5 @@
 ---
-title: "How to access/upload to Windows Azure Files in PowerShell"
+title: "How to access/upload to Azure Files in PowerShell"
 date: 2019-09-08T16:47:11+08:00
 draft: false
 ---
@@ -7,7 +7,7 @@ draft: false
 ```powershell
 Install-Module -Name Az -AllowClobber -Scope AllUsers
 ```
-### Import Az.Storage
+### Import Az.Storage Module
 ```powershell
 PS C:\Users\admin> Import-Module Az.Storage
 PS C:\Users\admin> Get-Module
@@ -18,7 +18,7 @@ Script     1.6.2      Az.Accounts                         {Add-AzEnvironment, Cl
 Script     1.6.0      Az.Storage                          {Add-AzRmStorageContainerLegalHold, Add-AzStorageAccountMa...
 ...
 ```
-### Login to Azure account
+### Login to Azure
 ```powershell
 PS C:\Users\admin> Connect-AzAccount
 
@@ -26,10 +26,8 @@ Account                     SubscriptionName         TenantId                   
 -------                     ----------------         --------                             -----------
 AndrewBlue_1988@hotmail.com Visual Studio Enterprise 3a58e326-6e27-4b00-bf8c-13c1711f6a2a AzureCloud
 ```
-### Initialize storage access
+### Initialize Storage Account Context
 1. Get storage access key
-2. Create storage context
-
 ```powershell
 $key=PS C:\Users\admin> $key=Get-AzStorageAccountKey -ResourceGroupName Default -Name vtkmnck123
 PS C:\Users\admin> $key.GetType()
@@ -43,13 +41,14 @@ IsPublic IsSerial Name                                     BaseType
 -------- -------- ----                                     --------
 True     False    StorageAccountKey                        System.Object
 ```
+2. Create storage context
 ----------
 ```powershell
 $context=New-AzStorageContext -StorageAccountName vtkmnck123 -StorageAccountKey $key[0].Value
 ```
-### Azure Files share operation
+### Azure Filesshare operation
 ```powershell
-PS C:\Users\admin> $context |Get-AzStorageShare
+PS C:\Users\admin> $context | Get-AzStorageShare
 
 
    File End Point: https://vtkmnck123.file.core.windows.net/

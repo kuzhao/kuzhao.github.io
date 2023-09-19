@@ -11,7 +11,7 @@ The next step would be to copy connStr and have it ready by your hand, as we wil
 Refer to snapshot [here](https://github.com/kuzhao/azurePaas/tree/master/eventhub/send_recv_offset/getEHconnStr.png) on where to get it.
 
 ###  Explanation on the code
-I composed both py files based on the example [azure-sdk-for-python](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/eventhub/azure-eventhubs/examples)
+I composed both py files based on the example [azure-sdk-for-python](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/eventhub/azure-eventhubs/examples).
 
 You ought to pass both connStr obtained in above section, along with the name of EventHub to use, as the 1st and 2nd arg respectively.  
 For send.py specifically, you can pass a timestamp in the 3rd arg, for EH offset so that the script reads event since that particular datetime. Note that the format should be **DDMMYYYY HH:MM:SS** in **UTC**.  
@@ -30,7 +30,7 @@ Example:
 * In practical scenario, a more dynamic mechanism would be necessary to handle partition listening/reception  
 
 ### Sample logs
-Check [here](https://github.com/kuzhao/azurePaas/tree/master/eventhub/send_recv_offset/terminalLog) for a detailed send/recv running log.
+Check [here](https://github.com/kuzhao/azurePaas/tree/master/eventhub/send_recv_offset/terminalLog) for detailed send/recv logs.
 
 ### EventHub metrics
 You should be able to see up and down in metric chart, Overview of EH namespace blade through AzurePortal. Refer to snapshot [here](https://github.com/kuzhao/azurePaas/tree/master/eventhub/send_recv_offset/EHmetrics.png) for an example.
