@@ -4,7 +4,8 @@ date: 2022-06-18T13:00:11+08:00
 draft: false
 ---
 Many of you have the experience of setting up a vanilla K8s cluster over your own infrastructure: Get the OS built, install kubeadm/kubelet, run kubeadm and finally setup CNI. Then to add more nodes, just run the generated "kubeadm" cmdline on each of them.  
-On the contrary, will you be interested in how a node is built by a cloud provider? You will find it out in case of AKS in this article.  
+On the contrary, will you be interested in how a node is built by a cloud provider? You will find it out in case of AKS in this article.
+
 #### Create a node pool
 Our journey starts with the birth of a new node pool via either a button click on the portal or azcli command. Normally after the process starts, you just sit and wait for a "successful" message to pop out.  
 Behind the scenes, if you curiously examine the cluster's infrastructure resource group, you will see a new VMSS or availabilitySet being created. Furthermore, you will get one activity log entry as below:  
@@ -35,17 +36,18 @@ Replacing '\\"' with plain double quote, we have a complete resource json for th
               "type": "CustomScript",
           ...
 ```
-OK, at least there is a hint on CustomScript extension which is probably up to provisioning scripts.
+OK, at least there is a hint on CustomScript extension(CSE) which is probably up to provisioning scripts.
+
 #### Inside the Ubuntu
-To dig more into further provisioning work done automatically, we have to login on the VM. You can access it through either a nodeshell or SSH with the key passed in when creating the cluster.  
+To dig more into further provisioning work by CSE, we have to login to a node. You can access it through either a nodeshell, or SSH with the key passed in when creating the cluster.  
 **Under /opt/azure/containers**  
-It's not clueless that we carefully check /opt, per the Linux convention that custom stuff can be put under that mount point.
+It's not clueless that we carefully check /opt, per the Linux convention that custom stuff can be put under that mount point.  
 ```bash
 ~# ls /opt/azure/containers
 kubelet.sh  provision.complete  provision.sh  provision_cis.sh  provision_configs.sh  provision_installs.sh  provision_installs_distro.sh  provision_source.sh  provision_source_distro.sh  provision_start.sh
 ```
-Who would be the invoker, then?  
-**More on cloud-init**  
+
+**More from cloud-init**  
 Sounds surprising, but there does exist the trace of cloud-init on a node. See below:
 ```bash
 ~# ls /var/log | grep cloud-init
@@ -57,10 +59,23 @@ cloud-init.log
 + . /opt/azure/containers/provision_source.sh
 + . /opt/azure/containers/provision_source_distro.sh
 ```
-Based on the above exhibits, part of node provisioning is done through cloud-init which invokes tailor-made scripts under /opt/azure/containers.
-#### CSE
-Now is the time to chase after the custome script part we previously noticed in the Json. Although the original custom script will be deleted after finishing so we can no longer find it, it is still possible to figure out what was done throughh CSE script output.  
-Per [this link](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-linux#troubleshooting), the log is /var/lib/waagent/custom-script/download/0/stdout. Cat the file and do a little formatting, it unveils the behavior, excerpt below:
+Based on the above exhibits, part of node provisioning is done through cloud-init which places those scripts under /opt/azure/containers.  
+But who would call and run them?
+
+#### WAAgent and CSE
+Move the cursor to syslog for more trails. As the node has just been initialized, the syslog is short and makes it easy for us to go through it.  
+We do have CustomScript extension related records as below:  
+```bash
+Oct 10 03:13:03 aks-np2-39451173-vmss000000 python3[1401]: 2022-10-10T03:13:03.952233Z INFO ExtHandler [Microsoft.Azure.Extensions.CustomScript-2.1.7] Initializing extension Microsoft.Azure.Extensions.CustomScript-2.1.7
+Oct 10 03:13:03 aks-np2-39451173-vmss000000 python3[1401]: 2022-10-10T03:13:03.953538Z INFO ExtHandler ExtHandler [CGI] Created /lib/systemd/system/azure-vmextensions-Microsoft.Azure.Extensions.CustomScript_2.1.7.slice
+Oct 10 03:13:03 aks-np2-39451173-vmss000000 python3[1401]: 2022-10-10T03:13:03.954019Z INFO ExtHandler [Microsoft.Azure.Extensions.CustomScript-2.1.7] Update settings file: 1.settings
+Oct 10 03:13:07 aks-np2-39451173-vmss000000 python3[1401]: time=2022-10-10T03:13:06Z version=v2.1.6/git@ad1546c-dirty operation=enable seq=1 event="creating output directory" path=/var/lib/waagent/custom-script/download/1
+Oct 10 03:13:07 aks-np2-39451173-vmss000000 python3[1401]: time=2022-10-10T03:13:06Z version=v2.1.6/git@ad1546c-dirty operation=enable seq=1 event="executing command" output=/var/lib/waagent/custom-script/download/1
+Oct 10 03:13:07 aks-np2-39451173-vmss000000 python3[1401]: time=2022-10-10T03:13:06Z version=v2.1.6/git@ad1546c-dirty operation=enable seq=1 event="executing protected commandToExecute" output=/var/lib/waagent/custom-script/download/1
+```
+
+So WAAgent initializes CustomScript extension first, then runs the script/command specified in 1.settings and outputs into the output directory at /var/lib/waagent/custom-script/download/1.  
+The actual output file inside the directory is "stdout" (Ref [custom-script-linux_troubleshooting](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-linux#troubleshooting)). Cat the file and do a little formatting, it unveils the behavior, excerpt below:
 ```bash
 ...
 + rm -f /etc/apt/apt.conf.d/99periodic
