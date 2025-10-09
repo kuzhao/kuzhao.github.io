@@ -34,7 +34,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     env:
-      HUGO_VERSION: 0.151.0
+      HUGO_VERSION: 0.114.0
     steps:
       - name: Setup Pages
         id: pages
