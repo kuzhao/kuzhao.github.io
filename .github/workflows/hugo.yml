@@ -28,11 +28,17 @@ defaults:
 
 jobs:
   # Build job
-  build:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     env:
-      HUGO_VERSION: 0.114.0
+      HUGO_VERSION: 0.151.0
     steps:
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
@@ -53,7 +59,14 @@ jobs:
         run: |
           hugo \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"      
+            --baseURL "${{ steps.pages.outputs.base_url }}/"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./public
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
       - name: Add build pass badge
         uses: wow-actions/add-badges@v1
         env:
@@ -70,21 +83,3 @@ jobs:
                 "link": "${{ env.repo_url }}/actions/workflows/hugo.yml"
               }
             ]
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ./public
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
