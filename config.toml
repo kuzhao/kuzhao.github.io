@@ -14,8 +14,8 @@ theme="anatole"
   weight = 1
 
 [[menu.main]]
-  name = "AzureLab"
-  url = "/azurelab"
+  name = "Howtos"
+  url = "/howtos"
   weight = 2
 
 [[menu.main]]
